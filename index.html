@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PawSafe Kit</title>
+<style id="page-style">@page { size: letter; margin: 0; }</style>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body data-view="edit" data-tab="id">
+
+<header class="top">
+  <div class="brand">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="6" cy="10" rx="2.2" ry="3"/><ellipse cx="10.5" cy="6" rx="2.2" ry="3"/><ellipse cx="16" cy="6" rx="2.2" ry="3"/><ellipse cx="19.5" cy="10.5" rx="2.2" ry="3"/><path d="M12 12c-3 0-6 3.5-6 6 0 2 2 3 4 2.5 1.2-.3 2.8-.3 4 0 2 .5 4-.5 4-2.5 0-2.5-3-6-6-6z"/></svg>
+    PawSafe Kit
+  </div>
+  <span id="saved" class="saved" role="status"></span>
+  <button type="button" id="btn-edit" class="btn primary small">Edit &amp; reprint</button>
+</header>
+
+<main class="layout">
+
+<!-- ============ EDIT ============ -->
+<section id="pane-edit" class="pane">
+<form id="form" autocomplete="off" onsubmit="return false">
+
+  <div class="block" id="petbar" hidden>
+    <h2>Your pets</h2>
+    <div class="tabs" id="pet-tabs"></div>
+    <p class="hint" id="pet-match" hidden>Matching design is on: color and style come from Pet 1.</p>
+    <button type="button" id="pet-del" class="btn danger small" hidden>Remove this pet</button>
+  </div>
+  <div class="block extras-links" data-feature="studio" hidden>
+    <a class="btn ghost small" href="studio-xh4dye/">🎨 Open PawSafe Studio</a>
+  </div>
+  <div class="block extras-links" data-feature="emergency" hidden>
+    <a class="btn ghost small" href="emergency-8h740d/">🚨 Open Lost Pet Emergency Pack</a>
+  </div>
+  <div class="block extras-links" data-feature="familyPack" hidden>
+    <a class="btn ghost small" href="family-ehzh85/">👨‍👩‍👧 Open Family Pack</a>
+  </div>
+
+  <div class="block">
+    <h2><span class="n">1</span> About your pet</h2>
+
+    <div class="field">
+      <span class="lbl">Species</span>
+      <div class="chips">
+        <label class="chip"><input type="radio" name="species" value="dog" data-bind="pet.species"><span>🐶 Dog</span></label>
+        <label class="chip"><input type="radio" name="species" value="cat" data-bind="pet.species"><span>🐱 Cat</span></label>
+        <label class="chip"><input type="radio" name="species" value="other" data-bind="pet.species"><span>🐾 Other</span></label>
+      </div>
+    </div>
+
+    <div class="field"><label class="lbl" for="f-name">Name</label>
+      <input id="f-name" type="text" data-bind="pet.name" maxlength="40" placeholder="e.g. Max"></div>
+
+    <div class="row2">
+      <div class="field"><label class="lbl" for="f-sex">Sex</label>
+        <select id="f-sex" data-bind="pet.sex"><option value="">—</option><option>Male</option><option>Female</option><option>Unknown</option></select></div>
+      <div class="field"><label class="lbl" for="f-breed">Breed</label>
+        <input id="f-breed" type="text" data-bind="pet.breed" maxlength="40" placeholder="e.g. Labrador mix"></div>
+    </div>
+
+    <div class="field"><label class="lbl" for="f-coat">Coat color</label>
+      <input id="f-coat" type="text" data-bind="pet.coat" maxlength="40" placeholder="e.g. Golden with white chest"></div>
+
+    <div class="field">
+      <span class="lbl">Date of birth</span>
+      <div class="chips small">
+        <label class="chip"><input type="radio" name="bm" value="date" data-bind="pet.birthMode"><span>Birth date</span></label>
+        <label class="chip"><input type="radio" name="bm" value="age" data-bind="pet.birthMode"><span>Approximate age</span></label>
+      </div>
+      <input id="f-bdate" type="date" data-bind="pet.birthDate" aria-label="Birth date">
+      <input id="f-age" type="text" data-bind="pet.age" maxlength="30" placeholder="e.g. about 3 years" aria-label="Approximate age" hidden>
+    </div>
+
+    <div class="row2">
+      <div class="field"><label class="lbl" for="f-city">Birthplace: city</label>
+        <input id="f-city" type="text" data-bind="pet.city" maxlength="40" placeholder="e.g. Miami"></div>
+      <div class="field"><label class="lbl" for="f-country">Country</label>
+        <input id="f-country" type="text" data-bind="pet.country" maxlength="40" placeholder="e.g. USA"></div>
+    </div>
+
+    <div class="field"><label class="lbl" for="f-marks">Distinguishing marks</label>
+      <textarea id="f-marks" rows="2" data-bind="pet.marks" maxlength="140" placeholder="e.g. White paw, small scar on left ear"></textarea></div>
+
+    <div class="field"><label class="lbl" for="f-chip">Microchip <em>(optional)</em></label>
+      <input id="f-chip" type="text" data-bind="pet.microchip" maxlength="30" inputmode="numeric" placeholder="15-digit number"></div>
+  </div>
+
+  <div class="block">
+    <h2><span class="n">2</span> Human family</h2>
+    <p class="hint">Write each person and how they relate to the pet, any way you like.</p>
+    <div id="family-list"></div>
+    <button type="button" id="fam-add" class="btn ghost small">+ Add person</button>
+  </div>
+
+  <div class="block">
+    <h2><span class="n">3</span> Photo</h2>
+    <p class="hint">Choose a clear photo. Then drag and zoom to frame the face. Final printed size: <b>3 × 4 cm</b> (1.2 × 1.6 in) for the ID and vaccination cards, <b>4 × 5 cm</b> for the certificate.</p>
+    <input id="photo-file" type="file" accept="image/*" hidden>
+    <div class="photo-actions">
+      <button type="button" id="photo-pick" class="btn ghost small">Choose photo</button>
+      <button type="button" id="photo-clear" class="btn ghost small" hidden>Remove photo</button>
+    </div>
+    <div id="cropper" hidden>
+      <div class="chips small" id="crop-tabs">
+        <label class="chip"><input type="radio" name="ck" value="id" checked><span>3 × 4 cm · ID &amp; vaccination</span></label>
+        <label class="chip"><input type="radio" name="ck" value="cert"><span>4 × 5 cm · Certificate</span></label>
+      </div>
+      <div id="crop-frame" aria-label="Photo crop area. Drag to move."><img id="crop-img" alt="" draggable="false"><div class="guide"></div></div>
+      <label class="zoom">Zoom <input id="crop-zoom" type="range" min="1" max="4" step="0.01" value="1"></label>
+      <p class="hint" id="crop-size"></p>
+    </div>
+  </div>
+
+  <div class="block">
+    <h2><span class="n">4</span> Kit color</h2>
+    <div class="chips">
+      <label class="chip sw pink"><input type="radio" name="color" value="pink" data-bind="color"><span>Pink</span></label>
+      <label class="chip sw blue"><input type="radio" name="color" value="blue" data-bind="color"><span>Blue</span></label>
+      <label class="chip sw green"><input type="radio" name="color" value="green" data-bind="color"><span>Green</span></label>
+    </div>
+  </div>
+
+  <div class="block">
+    <h2><span class="n">5</span> QR ID Tag</h2>
+    <p class="hint">Whoever scans the QR sees what you enter here. Use the switch next to each item to hide it. Nothing is stored on a server: the data travels inside the QR link.</p>
+
+    <div class="field sw-field"><label class="lbl" for="t-owner">Owner name</label>
+      <input id="t-owner" type="text" data-bind="tag.owner" maxlength="40" placeholder="e.g. Laura Smith">
+      <label class="switch"><input type="checkbox" data-bind="tag.show.owner"><span>Show</span></label></div>
+
+    <div class="field sw-field"><label class="lbl" for="t-phone">Phone with WhatsApp <em>(optional)</em></label>
+      <input id="t-phone" type="tel" inputmode="tel" data-bind="tag.phone" maxlength="24" placeholder="+1 555 123 4567">
+      <label class="switch"><input type="checkbox" data-bind="tag.show.phone"><span>Show</span></label>
+      <p class="hint" id="phone-msg">International format with country code. It can be yours or a separate emergency number. Without a phone, the page shows only the name and note, with no WhatsApp button.</p></div>
+
+    <div class="field sw-field"><label class="lbl" for="t-addr">Address <em>(optional)</em></label>
+      <input id="t-addr" type="text" data-bind="tag.address" maxlength="80" placeholder="Street, city">
+      <label class="switch"><input type="checkbox" data-bind="tag.show.address"><span>Show</span></label></div>
+
+    <div class="field sw-field"><label class="lbl" for="t-note">Note <em>(optional)</em></label>
+      <input id="t-note" type="text" data-bind="tag.note" maxlength="80" placeholder="e.g. Allergic to chicken">
+      <label class="switch"><input type="checkbox" data-bind="tag.show.note"><span>Show</span></label></div>
+
+    <label class="check"><input type="checkbox" data-bind="tag.nameOnFront"> Print the pet's name on the front of the tag</label>
+    <label class="check"><input type="checkbox" data-bind="tag.photoInQr"> Include a tiny photo in the QR <em>(makes the QR much denser; dropped if it does not fit)</em></label>
+  </div>
+
+  <div class="block">
+    <h2><span class="n">6</span> Save</h2>
+    <p class="hint">Your kit is saved on this device automatically. To use it on another device, download a backup and import it there.</p>
+    <div class="photo-actions">
+      <button type="button" id="bk-download" class="btn ghost small">Download my backup</button>
+      <button type="button" id="bk-import" class="btn ghost small">Import backup</button>
+      <button type="button" id="bk-reset" class="btn danger small">Start over</button>
+    </div>
+    <input id="bk-file" type="file" accept="application/json,.json" hidden>
+    <p class="hint" id="bk-msg" role="status"></p>
+  </div>
+
+  <div class="block cta-block">
+    <button type="button" id="btn-to-docs" class="btn primary">Preview &amp; print →</button>
+  </div>
+
+</form>
+</section>
+
+<!-- ============ DOCUMENTS ============ -->
+<section id="pane-docs" class="pane">
+  <div class="docs-bar">
+    <div class="tabs" role="tablist">
+      <button type="button" class="tab" data-tab-btn="id">Pet ID</button>
+      <button type="button" class="tab" data-tab-btn="birth">Birth Certificate</button>
+      <button type="button" class="tab" data-tab-btn="vacc">Vaccination</button>
+      <button type="button" class="tab" data-tab-btn="tag">QR Tag</button>
+    </div>
+    <div class="opts">
+      <label>Paper
+        <select id="o-paper" data-bind="print.paper"><option value="letter">Letter</option><option value="a4">A4</option></select></label>
+      <label id="o-tag-wrap">Tag
+        <select id="o-tag" data-bind="print.tagSize">
+          <option value="r25">Round 25 mm</option><option value="r30">Round 30 mm</option><option value="r35">Round 35 mm</option><option value="rect">Rectangular 45 × 28 mm</option></select></label>
+    </div>
+    <div class="printbtns">
+      <button type="button" id="btn-print" class="btn primary small">Print this</button>
+      <button type="button" id="btn-print-all" class="btn ghost small">Print all at once</button>
+    </div>
+  </div>
+  <p class="caption" id="caption"></p>
+  <div id="warn"></div>
+  <div id="docs"></div>
+</section>
+
+</main>
+
+<nav class="bottom" aria-label="Views">
+  <button type="button" data-view-btn="edit">✏️ Edit</button>
+  <button type="button" data-view-btn="docs">🖨 Preview &amp; print</button>
+</nav>
+
+<script src="config.js"></script>
+<script src="vendor/qrcode.js"></script>
+<script src="common.js"></script>
+<script src="kit.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>PawSafe Studio</title>
+<style id="page-style">@page { size: letter; margin: 0; }</style>
+<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../extras.css">
+</head>
+<body class="x" data-tab="id">
+
+<header class="top">
+  <div class="brand">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="6" cy="10" rx="2.2" ry="3"/><ellipse cx="10.5" cy="6" rx="2.2" ry="3"/><ellipse cx="16" cy="6" rx="2.2" ry="3"/><ellipse cx="19.5" cy="10.5" rx="2.2" ry="3"/><path d="M12 12c-3 0-6 3.5-6 6 0 2 2 3 4 2.5 1.2-.3 2.8-.3 4 0 2 .5 4-.5 4-2.5 0-2.5-3-6-6-6z"/></svg>
+    PawSafe Studio
+  </div>
+  <span id="saved" class="saved" role="status"></span>
+  <a class="back" href="../index.html">← My kit</a>
+</header>
+
+<main class="xmain">
+  <div class="xintro">
+    <h1>PawSafe Studio</h1>
+    <p>Design your four documents: pick a template, change colors, background and font, and drag the photo and name where you want them. Your pet's details come from your kit.</p>
+  </div>
+
+  <div class="stu">
+    <div class="ctl-col">
+      <div class="block" id="pickblock" hidden>
+        <h2>Which pet?</h2>
+        <select id="pet-pick"></select>
+      </div>
+
+      <div class="block">
+        <h2><span class="n">1</span> Template</h2>
+        <div class="tplgrid" id="tpl-grid"></div>
+      </div>
+
+      <div class="block">
+        <h2><span class="n">2</span> Colors</h2>
+        <div class="colors">
+          <label>Main <input type="color" id="c-main"></label>
+          <label>Dark accent <input type="color" id="c-accent"></label>
+          <label>Light tint <input type="color" id="c-light"></label>
+        </div>
+        <p class="hint">Pick any color. Dark and light follow the main color until you change them.</p>
+        <button type="button" id="c-reset" class="btn ghost small">Back to kit colors</button>
+      </div>
+
+      <div class="block">
+        <h2><span class="n">3</span> Background</h2>
+        <div class="row2">
+          <div class="field"><label class="lbl" for="bg-type">Style</label><select id="bg-type"></select></div>
+          <div class="field"><label class="lbl" for="bg-color">Color</label><input type="color" id="bg-color" style="width:100%;height:44px;padding:2px;border:1.5px solid #cfd4e0;border-radius:10px;background:#fff"></div>
+        </div>
+        <p class="hint" id="bg-msg">Light backgrounds print best and use less ink.</p>
+      </div>
+
+      <div class="block">
+        <h2><span class="n">4</span> Font</h2>
+        <select id="font-pick"></select>
+        <p class="hint fontprev" id="font-prev">Max · Born in Miami</p>
+        <p class="hint">Fonts come from your device, so printed results can differ a little between computers and phones.</p>
+      </div>
+
+      <div class="block">
+        <h2><span class="n">5</span> Move things</h2>
+        <p class="hint">Drag the <b>photo</b> or the <b>name</b> in the preview to move it. Tap one to resize it.</p>
+        <div class="selbox" id="selbox" hidden>
+          <div><b id="sel-name"></b></div>
+          <label>Size <input type="range" id="sel-size" min="0.6" max="1.6" step="0.02"></label>
+          <button type="button" id="sel-reset" class="btn ghost small">Reset this one</button>
+        </div>
+        <p class="hint" id="sel-none">Nothing selected.</p>
+        <button type="button" id="mv-reset" class="btn ghost small">Reset all positions</button>
+      </div>
+
+      <div class="block">
+        <h2><span class="n">6</span> Save</h2>
+        <p class="hint">Saved on this device automatically, together with your kit. Use a backup to move it to another device.</p>
+        <div class="photo-actions">
+          <button type="button" id="bk-download" class="btn ghost small">Download my backup</button>
+          <button type="button" id="bk-import" class="btn ghost small">Import backup</button>
+        </div>
+        <input id="bk-file" type="file" accept="application/json,.json" hidden>
+        <p class="hint" id="bk-msg" role="status"></p>
+      </div>
+    </div>
+
+    <section class="xdocs pane">
+      <div class="tabs xtabs" role="tablist">
+        <button type="button" class="tab" data-tab-btn="id">Pet ID</button>
+        <button type="button" class="tab" data-tab-btn="birth">Birth Certificate</button>
+        <button type="button" class="tab" data-tab-btn="vacc">Vaccination</button>
+        <button type="button" class="tab" data-tab-btn="tag">QR Tag</button>
+      </div>
+      <div class="xctl">
+        <label>Paper <select id="o-paper"><option value="letter">Letter</option><option value="a4">A4</option></select></label>
+        <label id="o-tag-wrap">Tag <select id="o-tag"><option value="r25">Round 25 mm</option><option value="r30">Round 30 mm</option><option value="r35">Round 35 mm</option><option value="rect">Rectangular 45 × 28 mm</option></select></label>
+        <button type="button" id="btn-print" class="btn primary small">Print this</button>
+        <button type="button" id="btn-print-all" class="btn ghost small">Print all at once</button>
+      </div>
+      <div id="warn"></div>
+      <div id="docs" class="studio"></div>
+    </section>
+  </div>
+</main>
+
+<script src="../config.js"></script>
+<script src="../vendor/qrcode.js"></script>
+<script src="../common.js"></script>
+<script src="../kit.js"></script>
+<script src="studio.js"></script>
+</body>
+</html>

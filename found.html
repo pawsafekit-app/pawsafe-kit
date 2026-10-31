@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<meta name="referrer" content="no-referrer">
+<title>Found pet · PawSafe</title>
+<style>
+  :root { --c:#e75a97; --cd:#a82f66; --cl:#fde7f1; }
+  body[data-c="b"] { --c:#3a96dc; --cd:#1c68a8; --cl:#e2f1fc; }
+  body[data-c="g"] { --c:#3bae7b; --cd:#1e7c52; --cl:#e1f5ec; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif; color:#1f2430; background:var(--cl); min-height:100vh; }
+  .wrap { max-width:460px; margin:0 auto; padding:20px 16px 40px; }
+  .brand { display:flex; align-items:center; gap:8px; color:var(--cd); font-weight:700; letter-spacing:.04em; font-size:14px; }
+  .brand svg { width:22px; height:22px; fill:currentColor; }
+  .card { background:#fff; border-radius:20px; padding:22px 20px; margin-top:14px; box-shadow:0 6px 24px rgba(0,0,0,.08); text-align:center; }
+  .photo { width:96px; height:128px; object-fit:cover; border-radius:12px; border:3px solid var(--c); margin:0 auto 10px; display:block; image-rendering:auto; }
+  .icon { font-size:56px; line-height:1; }
+  h1 { margin:8px 0 2px; font-size:32px; color:var(--cd); word-break:break-word; }
+  .lead { margin:0 0 4px; color:#5b6272; }
+  .note { margin:14px 0 0; padding:12px 14px; background:var(--cl); border-radius:12px; text-align:left; white-space:pre-wrap; word-break:break-word; }
+  .note b { display:block; font-size:12px; letter-spacing:.06em; text-transform:uppercase; color:var(--cd); margin-bottom:2px; }
+  .info { margin:14px 0 0; text-align:left; font-size:15px; }
+  .info div { padding:6px 0; border-top:1px solid #eee; word-break:break-word; }
+  .info span { color:#5b6272; font-size:12px; text-transform:uppercase; letter-spacing:.06em; display:block; }
+  .btns { display:grid; gap:10px; margin-top:18px; }
+  .btn { display:block; width:100%; padding:15px 16px; border-radius:14px; border:0; font:inherit; font-weight:700; font-size:17px; text-align:center; text-decoration:none; cursor:pointer; }
+  .btn.call { background:var(--c); color:#fff; }
+  .btn.wa { background:#25d366; color:#06371b; }
+  .status { min-height:1.4em; margin:8px 0 0; font-size:14px; color:#5b6272; }
+  .lostbar { margin:0 0 10px; padding:8px 12px; border-radius:10px; background:#fde8e8; color:#a31621; font-weight:700; font-size:14px; }
+  .none { margin-top:16px; color:#5b6272; font-size:15px; }
+  .honest { margin-top:16px; font-size:13px; color:#5b6272; background:#fff; border-radius:14px; padding:12px 14px; }
+  .foot { margin-top:14px; text-align:center; font-size:12px; color:#7a8090; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="brand">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="6" cy="10" rx="2.2" ry="3"/><ellipse cx="10.5" cy="6" rx="2.2" ry="3"/><ellipse cx="16" cy="6" rx="2.2" ry="3"/><ellipse cx="19.5" cy="10.5" rx="2.2" ry="3"/><path d="M12 12c-3 0-6 3.5-6 6 0 2 2 3 4 2.5 1.2-.3 2.8-.3 4 0 2 .5 4-.5 4-2.5 0-2.5-3-6-6-6z"/></svg>
+    PAWSAFE
+  </div>
+  <main id="app" class="card" aria-live="polite"></main>
+  <p class="honest" id="honest"></p>
+  <p class="foot">This page stores nothing. Everything you see is inside the link of the tag you scanned.</p>
+</div>
+<script src="common.js"></script>
+<script src="found.js"></script>
+</body>
+</html>

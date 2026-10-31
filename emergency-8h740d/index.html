@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Lost Pet Emergency Pack · PawSafe</title>
+<style id="page-style">@page { size: letter; margin: 0; }</style>
+<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../extras.css">
+</head>
+<body class="x" data-tab="poster">
+
+<header class="top">
+  <div class="brand">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="6" cy="10" rx="2.2" ry="3"/><ellipse cx="10.5" cy="6" rx="2.2" ry="3"/><ellipse cx="16" cy="6" rx="2.2" ry="3"/><ellipse cx="19.5" cy="10.5" rx="2.2" ry="3"/><path d="M12 12c-3 0-6 3.5-6 6 0 2 2 3 4 2.5 1.2-.3 2.8-.3 4 0 2 .5 4-.5 4-2.5 0-2.5-3-6-6-6z"/></svg>
+    Emergency Pack
+  </div>
+  <a class="back" href="../index.html">← My kit</a>
+</header>
+
+<main class="xmain">
+  <div class="xintro">
+    <h1>Lost Pet Emergency Pack</h1>
+    <p>A poster, social media images and a first-24-hours checklist, built from the pet saved in your kit.</p>
+  </div>
+
+  <div class="xcols two">
+    <section class="block" id="data">
+      <h2>Your pet</h2>
+      <div class="field" id="pick-wrap" hidden><label class="lbl" for="pet-pick">Which pet?</label><select id="pet-pick"></select></div>
+      <div class="petline" id="pet-card"></div>
+      <p class="hint" id="kit-warn"></p>
+
+      <h2 style="margin-top:16px">About this emergency</h2>
+      <div class="field"><label class="lbl" for="e-place">Last seen: place</label>
+        <input id="e-place" type="text" data-e="place" maxlength="80" placeholder="e.g. Oak Street park, near the fountain"></div>
+      <div class="field"><label class="lbl" for="e-when">Last seen: date and time</label>
+        <input id="e-when" type="text" data-e="when" maxlength="40" placeholder="e.g. Oct 28, around 6 pm"></div>
+      <div class="field"><label class="lbl" for="e-extra">Anything that helps <em>(optional)</em></label>
+        <input id="e-extra" type="text" data-e="extra" maxlength="90" placeholder="e.g. Blue collar, shy with strangers"></div>
+      <div class="field"><label class="lbl" for="e-reward">Reward text <em>(optional)</em></label>
+        <input id="e-reward" type="text" data-e="reward" maxlength="40" placeholder="Only if you want to offer one"></div>
+      <label class="check"><input type="checkbox" data-e="phoneOnPosts"> Show my phone number on the social images</label>
+      <label class="check"><input type="checkbox" data-e="qrOnPosts"> Show the QR code on the social images</label>
+      <p class="hint">The QR opens a page where the finder can call you or send their location on WhatsApp. That page includes your phone number, so anyone who scans the QR can see it. This is not GPS: you are only notified if the finder chooses to message you.</p>
+    </section>
+
+    <section class="xdocs pane">
+      <div class="tabs xtabs" role="tablist">
+        <button type="button" class="tab" data-tab-btn="poster">Poster</button>
+        <button type="button" class="tab" data-tab-btn="social">Social posts</button>
+        <button type="button" class="tab" data-tab-btn="check">First 24 hours</button>
+      </div>
+
+      <div class="xctl" id="print-ctl">
+        <label>Paper <select id="o-paper"><option value="letter">Letter</option><option value="a4">A4</option></select></label>
+        <button type="button" id="btn-print" class="btn primary small">Print this</button>
+      </div>
+      <div id="warn"></div>
+      <div id="docs"></div>
+
+      <div id="social" class="social" hidden>
+        <p class="xnote">Free to use. Posts are public: share only what you are comfortable making public. Images are 1080 px wide: post 1:1 (Instagram, Facebook) and story 9:16.</p>
+        <div id="social-list"></div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<script src="../config.js"></script>
+<script src="../vendor/qrcode.js"></script>
+<script src="../common.js"></script>
+<script src="../kit.js"></script>
+<script src="emergency.js"></script>
+</body>
+</html>

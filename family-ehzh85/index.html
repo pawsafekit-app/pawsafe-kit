@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>PawSafe Family Pack</title>
+<style id="page-style">@page { size: letter; margin: 0; }</style>
+<link rel="stylesheet" href="../styles.css">
+<link rel="stylesheet" href="../extras.css">
+</head>
+<body class="x" data-tab="ftag">
+
+<header class="top">
+  <div class="brand">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="6" cy="10" rx="2.2" ry="3"/><ellipse cx="10.5" cy="6" rx="2.2" ry="3"/><ellipse cx="16" cy="6" rx="2.2" ry="3"/><ellipse cx="19.5" cy="10.5" rx="2.2" ry="3"/><path d="M12 12c-3 0-6 3.5-6 6 0 2 2 3 4 2.5 1.2-.3 2.8-.3 4 0 2 .5 4-.5 4-2.5 0-2.5-3-6-6-6z"/></svg>
+    Family Pack
+  </div>
+  <span id="saved" class="saved" role="status"></span>
+  <a class="back" href="../index.html">← My kit</a>
+</header>
+
+<main class="xmain">
+  <div class="xintro">
+    <h1>PawSafe Family Pack</h1>
+    <p>Add up to 5 more pets to your kit. Each one gets its own documents and its own QR tag, and you can give the whole family a matching design.</p>
+  </div>
+
+  <section class="block">
+    <h2>Your pets <span class="badge" id="count"></span></h2>
+    <div class="fcards" id="fcards"></div>
+    <div class="photo-actions" style="margin-top:12px">
+      <button type="button" id="add-pet" class="btn primary small">+ Add a pet</button>
+    </div>
+    <p class="hint" id="add-msg">Adding a pet opens your kit on the new pet so you can fill in the details and photo. Owner name, phone and address are copied from Pet 1 (you can change them).</p>
+  </section>
+
+  <section class="block">
+    <h2>Matching design</h2>
+    <label class="check"><input type="checkbox" id="match"> Give the whole family the same design</label>
+    <p class="hint">When on, every pet uses Pet 1's kit color and Studio style. Names, photos and QR codes stay different.</p>
+    <div class="field"><span class="lbl">Family color</span>
+      <div class="chips">
+        <label class="chip sw pink"><input type="radio" name="fc" value="pink"><span>Pink</span></label>
+        <label class="chip sw blue"><input type="radio" name="fc" value="blue"><span>Blue</span></label>
+        <label class="chip sw green"><input type="radio" name="fc" value="green"><span>Green</span></label>
+      </div>
+    </div>
+    <p class="hint">This sets Pet 1's color. For templates, fonts and backgrounds, <a href="../studio-xh4dye/">open PawSafe Studio</a> on Pet 1.</p>
+  </section>
+
+  <section class="xdocs pane">
+    <h2 style="margin:0 0 6px">Family QR tags</h2>
+    <p class="xnote">One sheet with 2 tag pairs per pet. Each QR opens that pet's own page.</p>
+    <div class="xctl">
+      <label>Paper <select id="o-paper"><option value="letter">Letter</option><option value="a4">A4</option></select></label>
+      <label>Tag <select id="o-tag"><option value="r25">Round 25 mm</option><option value="r30">Round 30 mm</option><option value="r35">Round 35 mm</option><option value="rect">Rectangular 45 × 28 mm</option></select></label>
+      <button type="button" id="btn-print" class="btn primary small">Print family tags</button>
+    </div>
+    <div id="warn"></div>
+    <div id="docs"></div>
+  </section>
+</main>
+
+<script src="../config.js"></script>
+<script src="../vendor/qrcode.js"></script>
+<script src="../common.js"></script>
+<script src="../kit.js"></script>
+<script src="family.js"></script>
+</body>
+</html>
