@@ -26,6 +26,11 @@
   var kind = KIND[p.sp] || 'pet';
   var name = (p.n || '').trim();
   var phone = PS.normalizePhone(p.p);
+  // Solo para mostrar: +15550100100 se ve como +1 555 010 0100. El enlace tel: y wa.me usan el número sin espacios.
+  function showPhone(n) {
+    var m = /^\+1(\d{3})(\d{3})(\d{4})$/.exec(n);
+    return m ? '+1 ' + m[1] + ' ' + m[2] + ' ' + m[3] : n;
+  }
 
   var html = '';
   if (p.i && /^[A-Za-z0-9+\/=_-]+$/.test(p.i)) {
@@ -40,7 +45,7 @@
   var info = '';
   if (p.o) info += '<div><span>Owner</span>' + esc(p.o) + '</div>';
   if (p.a) info += '<div><span>Address</span>' + esc(p.a) + '</div>';
-  if (phone) info += '<div><span>Phone</span>' + esc(phone) + '</div>';
+  if (phone) info += '<div><span>Phone</span>' + esc(showPhone(phone)) + '</div>';
   if (info) html += '<div class="info">' + info + '</div>';
 
   if (phone) {
