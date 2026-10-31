@@ -26,7 +26,7 @@ Pet ID, birth certificate, vaccination card and a QR tag.
 Create them in minutes and print at home.
 Personalized keepsakes with your pet's photo.
 
-**Descripción:** Instant access · $27 (was $67)
+**Descripción:** Instant access · $27
 
 | Tarjeta | Titular (máx. 32) | Descripción corta | Link |
 |---|---|---|---|
@@ -35,7 +35,7 @@ Personalized keepsakes with your pet's photo.
 | c3 | Birth Certificate | A keepsake with their photo, birthplace and details. | …utm_content=P1 |
 | c4 | Vaccination Card | Space for vaccines. Doesn't replace your vet's records. | …utm_content=P1 |
 | c5 | QR ID Tag | Scan with any phone, no app. You choose the details shown. | …utm_content=P1 |
-| c6 | Get the PawSafe Kit | $27 (was $67). Print at home. Instant access. | …utm_content=P1 |
+| c6 | Get the PawSafe Kit | $27. Print at home. Instant access. | …utm_content=P1 |
 
 ## P2 · LOST (video 9:16, 15 s)
 **Headline:** A tag that gets your pet back to you
@@ -78,7 +78,7 @@ A sweet way to welcome them home.
 Personalized with their pet's photo and name.
 Instant digital delivery: print it, wrap it, gift it.
 
-**Descripción:** Instant access · $27 (was $67)
+**Descripción:** Instant access · $27
 
 ## P7 · ORGANIZED (estático)
 **Headline:** Their whole file in one place
@@ -95,7 +95,7 @@ Edit anytime.
 2. Pick a color.
 3. Print at home.
 
-**Descripción:** PawSafe Kit · $27 (was $67)
+**Descripción:** PawSafe Kit · $27
 
 ## P9 · CAT (estático)
 **Headline:** Indoor cat? A tag is still smart.
@@ -111,7 +111,7 @@ Scan with any phone, no app.
 Make your pet's ID and certificate look just like them.
 Pick pink, blue or green, add their photo, and edit and reprint anytime.
 
-**Descripción:** Instant access · $27 (was $67)
+**Descripción:** Instant access · $27
 
 | Tarjeta | Titular (máx. 32) | Descripción corta | Link |
 |---|---|---|---|
@@ -119,7 +119,7 @@ Pick pink, blue or green, add their photo, and edit and reprint anytime.
 | c2 | Fresh green | Same pet, same details. Your favorite color. | …utm_content=P10 |
 | c3 | Playful pink | Switch colors anytime and reprint. | …utm_content=P10 |
 | c4 | Classic blue | Make their ID look just like them. | …utm_content=P10 |
-| c5 | Get the PawSafe Kit | $27 (was $67). Edit and reprint anytime. | …utm_content=P10 |
+| c5 | Get the PawSafe Kit | $27. Edit and reprint anytime. | …utm_content=P10 |
 
 ---
 **Notas:** en los estáticos y carruseles el titular de la imagen puede ser más largo que el Headline de Meta (máx. 40). Los nombres de anuncio siguen la nomenclatura de la skill `ad-builder`.
