@@ -1,0 +1,1126 @@
+<!-- PawSafe · Quiz de venta (EN) · pegar en Impultienda (solo body). Editar solo el bloque CONFIG. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.utmify.com.br/scripts/utms/latest.js" data-utmify-prevent-xcod-sck data-utmify-prevent-subids async defer></script>
+<style>
+  :root{
+    --bg:#F3FAF7; --card:#fff; --ink:#17323A; --muted:#5E7780; --line:#D9EAE5;
+    --lila:#DCEFEA; --rosa:#FFE3D2; --amarillo:#FFE7A6; --amarillo-deep:#FFC84A; --amarillo-borde:#D9A21B;
+    --accent:#1E9A8A; --accent-txt:#12786B;
+    --ink-dark:#0C1E24;
+    --hot:#E0533A; --hot-2:#F28A5A;
+    --green:#1A9D4B; --green-soft:#E3F6E8; --green-line:#9ADDB0;
+    --soft-bg:#EAF6F2;
+    --radius:22px;
+    --font:'Quicksand',system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+    --display:'Playfair Display',Georgia,'Times New Roman',serif;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font);font-weight:500;font-size:15.5px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  body.modal-open{overflow:hidden}
+  img{max-width:100%;display:block}
+  button{font:inherit}
+  b,strong{font-weight:700}
+
+  /* ---------- Barra superior (no fija) ---------- */
+  .topbar{background:var(--bg)}
+  .progress{height:6px;width:100%;background:var(--lila);overflow:hidden}
+  .progress-fill{height:100%;width:100%;background:linear-gradient(90deg,var(--accent),var(--ink));transform:scaleX(0);transform-origin:left center;transition:transform .5s ease;will-change:transform}
+  .topbar-in{max-width:460px;margin:0 auto;padding:4px 16px 2px;height:38px;display:flex;align-items:center;justify-content:space-between}
+  .back{display:flex;align-items:center;width:40px;height:30px;border:0;background:none;color:var(--accent-txt);padding:0;cursor:pointer}
+  .back.is-hidden{visibility:hidden}
+  .wordmark{font-family:var(--display);font-weight:800;font-size:18px;color:var(--ink);letter-spacing:.2px}
+  .topbar-sp{width:40px}
+
+  .app{max-width:460px;margin:0 auto;padding:0 16px 20px;display:flex;flex-direction:column;min-height:calc(100vh - 44px);min-height:calc(100dvh - 44px)}
+  main{flex:1 0 auto}
+
+  /* ---------- Pantallas ---------- */
+  .screen{display:none;padding-top:6px}
+  .screen.active{display:block;animation:enter .3s ease both}
+  @keyframes enter{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  /* ---------- Tipografía ---------- */
+  .brand-title{font-family:var(--display);text-align:center;font-size:clamp(28px,8vw,36px);font-weight:800;line-height:1.12;margin:8px 0 6px}
+  .brand-title .tag{background:var(--lila);color:var(--ink);padding:0 10px;border-radius:12px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+  .subtitle{text-align:center;color:var(--accent-txt);font-weight:700;font-size:18px;line-height:1.35;margin:0 0 14px}
+  .txt{font-size:16px;margin:16px 0}
+  .center{text-align:center}
+  .t-rose{color:var(--accent-txt);font-weight:700}
+  .t-green{color:var(--green);font-weight:800}
+  .hl-green{background:var(--green);color:#fff;padding:0 5px;border-radius:4px;font-weight:700;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+  .hl-y{background:var(--amarillo);padding:0 5px;border-radius:4px;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+  .q-title{font-family:var(--display);font-size:clamp(24px,6.8vw,29px);font-weight:700;text-align:center;line-height:1.15;margin:22px 0 10px}
+  .q-title.top-space{margin-top:7vh}
+  .q-sub{text-align:center;color:var(--muted);font-size:14.5px;margin:0 0 6px}
+  .answer-yes{text-align:center;font-size:18px;margin:0 0 16px}
+  .answer-yes b{color:var(--green);font-weight:800}
+  .list-check{list-style:none;padding:0;margin:10px 0 16px}
+  .list-check li{font-size:15.5px;margin:8px 0}
+  .intro-cta{text-align:center;font-size:16.5px;font-weight:700;margin:20px 0 0}
+
+  /* ---------- Imágenes ---------- */
+  .img{display:block;width:100%;height:auto;margin:20px 0;border-radius:var(--radius);background:var(--lila);box-shadow:0 18px 40px -24px rgba(23,50,58,.45)}
+  .ph{display:flex;align-items:center;justify-content:center;text-align:center;padding:16px;border:2px dashed var(--accent);color:var(--ink);font-size:13px;font-weight:600;line-height:1.4;background:var(--soft-bg)}
+  .caption{text-align:center;color:var(--muted);font-size:13.5px;font-weight:600;margin:8px 0 0}
+
+  /* ---------- Pasos ---------- */
+  .steps{display:grid;gap:12px;margin:18px 0}
+  .step{display:flex;gap:14px;align-items:flex-start;background:#fff;border-radius:var(--radius);padding:14px 15px;box-shadow:inset 0 0 0 1.5px var(--line),0 10px 22px -18px rgba(23,50,58,.4)}
+  .step .n{flex:none;width:38px;height:38px;border-radius:50%;background:var(--ink);color:#fff;font-family:var(--display);font-weight:800;font-size:18px;display:flex;align-items:center;justify-content:center}
+  .step b{display:block;font-size:16.5px;line-height:1.25}
+  .step span{display:block;font-size:14px;color:var(--muted);margin-top:2px}
+
+  /* ---------- Aviso ---------- */
+  .note{display:flex;gap:10px;background:#FFF6DC;box-shadow:inset 0 0 0 1.5px #F3DC95;border-radius:16px;padding:12px 14px;margin:22px 0;font-size:13.5px;line-height:1.45;color:#5b4a14}
+  .note i{font-style:normal;flex:none}
+
+  /* ---------- Opciones ---------- */
+  .options{display:grid;gap:14px;margin-top:24px}
+  .opt{display:flex;align-items:center;gap:12px;width:100%;min-height:66px;text-align:left;font-size:16px;font-weight:600;color:var(--ink);cursor:pointer;background:var(--card);border:0;box-shadow:inset 0 0 0 2px var(--line),0 8px 20px -16px rgba(23,50,58,.35);border-radius:var(--radius);padding:14px 15px;transition:box-shadow .15s,transform .1s,background .15s;-webkit-tap-highlight-color:transparent}
+  .opt:active{transform:scale(.98)}
+  .opt .emo{font-size:25px;line-height:1;width:34px;text-align:center;flex:none}
+  .opt .radio{position:relative;width:22px;height:22px;flex:none;border-radius:50%;box-shadow:inset 0 0 0 2px #bcd8d0;transition:box-shadow .15s}
+  .opt.selected{background:#f7fcfa;box-shadow:inset 0 0 0 2.5px var(--ink),0 0 0 4px rgba(30,154,138,.18)}
+  .opt.selected .radio{box-shadow:inset 0 0 0 2px var(--ink)}
+  .opt.selected .radio::after{content:"";position:absolute;inset:5px;border-radius:50%;background:var(--ink)}
+
+  /* ---------- Botones (laten y brillan) ---------- */
+  .btn{position:relative;overflow:hidden;display:block;width:100%;margin:28px 0 14px;padding:17px 16px;border:0;border-radius:999px;cursor:pointer;text-align:center;text-decoration:none;font-family:var(--display);font-size:19px;font-weight:700;line-height:1.2;color:#fff;background:var(--ink);box-shadow:0 7px 0 -1px var(--ink-dark);animation:latido 1.6s ease-in-out infinite;-webkit-tap-highlight-color:transparent}
+  .btn::before{content:"";position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.4),transparent);transform:skewX(-20deg);animation:brillo 2.4s ease-in-out infinite;pointer-events:none}
+  .btn.pausado,.btn.pausado::before{animation-play-state:paused}
+  .btn:active{animation:none;transform:translateY(4px);box-shadow:0 3px 0 -1px var(--ink-dark)}
+  .btn-buy{color:var(--ink);background:linear-gradient(135deg,var(--amarillo),var(--amarillo-deep));box-shadow:0 8px 0 -1px var(--amarillo-borde),0 18px 34px -14px rgba(23,50,58,.45);animation-name:latidoY}
+  .btn-buy:active{box-shadow:0 3px 0 -1px var(--amarillo-borde)}
+  .btn-buy .pill{display:inline-block;background:#fff;border-radius:999px;padding:2px 11px;margin-left:4px;font-size:.85em;font-weight:800}
+  @keyframes latido{
+    0%{transform:scale(1);box-shadow:0 7px 0 -1px var(--ink-dark),0 0 0 0 rgba(23,50,58,.4)}
+    40%{transform:scale(1.035)}
+    70%{box-shadow:0 7px 0 -1px var(--ink-dark),0 0 0 14px rgba(23,50,58,0)}
+    100%{transform:scale(1);box-shadow:0 7px 0 -1px var(--ink-dark),0 0 0 14px rgba(23,50,58,0)}
+  }
+  @keyframes latidoY{
+    0%{transform:scale(1);box-shadow:0 8px 0 -1px var(--amarillo-borde),0 0 0 0 rgba(255,200,74,.8)}
+    40%{transform:scale(1.035)}
+    70%{box-shadow:0 8px 0 -1px var(--amarillo-borde),0 0 0 16px rgba(255,200,74,0)}
+    100%{transform:scale(1);box-shadow:0 8px 0 -1px var(--amarillo-borde),0 0 0 16px rgba(255,200,74,0)}
+  }
+  @keyframes brillo{0%{transform:translateX(0) skewX(-20deg)}60%,100%{transform:translateX(420%) skewX(-20deg)}}
+
+  /* ---------- Carruseles ---------- */
+  .carousel{position:relative;display:flex;align-items:flex-start;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;margin:18px -16px 0;padding:4px 16px 10px;scrollbar-width:none}
+  .carousel::-webkit-scrollbar{display:none}
+  .carousel>.slide{flex:0 0 72%;scroll-snap-align:center}
+  .carousel.wide>.slide{flex-basis:84%}
+  .carousel .img{margin:0}
+  .dots{display:flex;justify-content:center;align-items:center;gap:7px;margin:10px 0 2px}
+  .dots span{width:7px;height:7px;border-radius:50%;background:#c3dfd8;cursor:pointer;transition:all .2s}
+  .dots span.on{width:22px;height:8px;border-radius:99px;background:var(--ink)}
+  .sub-title{font-family:var(--display);font-size:22px;font-weight:700;text-align:center;line-height:1.2;margin:32px 0 0}
+  .carousel.fade{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 9%,#000 91%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 9%,#000 91%,transparent 100%)}
+  .carousel.fade>.slide{flex-basis:78%;opacity:.45;transform:scale(.94);transition:opacity .3s ease,transform .3s ease}
+  .carousel.fade>.slide.is-active{opacity:1;transform:none}
+  .carousel.fade .img,.carousel.wide .img{aspect-ratio:1/1;height:auto;object-fit:cover}
+  .dots-ig{width:70px;height:14px;margin:8px auto 0;overflow:hidden}
+  .dots-ig .dots-track{display:flex;align-items:center;height:14px;transition:transform .3s ease}
+  .dots-ig span{flex:0 0 10px;width:10px;height:10px;margin:0 2px;border-radius:50%;background:#c3dfd8;transform:scale(0);transition:transform .3s ease,background-color .3s ease;cursor:pointer}
+  .dots-ig span.on{background:var(--ink)}
+
+  /* ---------- Carga ---------- */
+  .load-title{font-family:var(--display);font-size:clamp(27px,7.6vw,34px);font-weight:800;text-align:center;line-height:1.2;margin:10vh 0 28px}
+  .load-title .hl{background:var(--rosa);padding:0 8px;border-radius:10px}
+  .load-row{display:flex;justify-content:space-between;align-items:baseline;color:var(--muted);font-weight:700;font-size:15.5px}
+  .load-row .pct{display:inline-block;min-width:3.4em;text-align:right;font-variant-numeric:tabular-nums;color:var(--accent-txt);font-weight:800}
+  .load-bar{position:relative;height:16px;background:var(--lila);border-radius:99px;overflow:hidden;margin:10px 0 18px;box-shadow:0 0 18px rgba(30,154,138,.35),inset 0 1px 2px rgba(0,0,0,.06)}
+  .load-fill{height:100%;width:100%;background:linear-gradient(90deg,#9fd8cc,#1E9A8A 55%,#17323A);border-radius:99px;transform:scaleX(0);transform-origin:left center;transition:transform 5s cubic-bezier(.25,.75,.45,1);will-change:transform}
+  .load-fill.run{transform:scaleX(1)}
+  .load-bar::after{content:"";position:absolute;top:0;left:-40%;width:30%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);animation:barraBrillo 1.1s linear infinite;pointer-events:none}
+  @keyframes barraBrillo{from{transform:translateX(0)}to{transform:translateX(470%)}}
+  .load-msg{text-align:center;font-size:15px;font-weight:600;color:var(--muted);min-height:48px;transition:opacity .2s ease}
+  .load-msg.swap{opacity:0}
+  .load-steps{list-style:none;padding:0;margin:26px auto 0;max-width:300px}
+  .load-steps li{display:flex;align-items:center;gap:10px;font-size:14.5px;font-weight:600;color:#7b9199;margin:10px 0;transition:color .3s}
+  .load-steps li i{flex:none;width:22px;height:22px;border-radius:50%;box-shadow:inset 0 0 0 2px #c3dfd8;display:flex;align-items:center;justify-content:center;font-style:normal;font-size:12px;color:#fff;transition:background .3s,box-shadow .3s}
+  .load-steps li.ok{color:var(--ink)}
+  .load-steps li.ok i{background:var(--green);box-shadow:none}
+
+  /* ---------- Timer ---------- */
+  .timer-box{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap;background:linear-gradient(90deg,var(--hot),var(--hot-2));color:#fff;border-radius:18px;text-align:center;font-weight:800;font-size:15px;letter-spacing:.3px;padding:13px 12px;margin-top:8px;text-transform:uppercase;animation:timerPulso 1.8s ease-in-out infinite}
+  .timer-box .js-timer{display:inline-block;background:#fff;color:var(--hot);border-radius:9px;padding:2px 8px;font-family:var(--display);font-size:19px;font-variant-numeric:tabular-nums;min-width:3.6em}
+  .timer-box .js-timer:empty{display:none}
+  .timer-box .ico{display:inline-block;animation:reloj 1s ease-in-out infinite;transform-origin:50% 60%}
+  @keyframes timerPulso{0%,100%{box-shadow:0 0 0 0 rgba(224,83,58,.45)}60%{box-shadow:0 0 0 10px rgba(224,83,58,0)}}
+  @keyframes reloj{0%,100%{transform:rotate(0)}25%{transform:rotate(-12deg)}75%{transform:rotate(12deg)}}
+  .buy-timer{text-align:center;color:var(--hot);font-weight:700;font-size:14px;margin:12px 0 0}
+  .buy-timer .js-timer{font-variant-numeric:tabular-nums}
+
+  /* ---------- Oferta ---------- */
+  .congrats{background:var(--green-soft);box-shadow:inset 0 0 0 1.5px var(--green-line);border-radius:var(--radius);text-align:center;padding:16px 14px;margin:16px 0 18px}
+  .congrats h2{font-family:var(--display);color:var(--green);font-size:29px;font-weight:800;margin:0;line-height:1.1}
+  .congrats p{font-size:17.5px;font-weight:700;margin:6px 0 0;line-height:1.3}
+  .congrats .prod{color:var(--accent-txt)}
+  .plan{background:#fff;box-shadow:inset 0 0 0 2px var(--lila);border-radius:var(--radius);padding:16px;margin:18px 0}
+  .plan h3{font-family:var(--display);margin:0 0 6px;font-size:19px;font-weight:700}
+  .plan ul{list-style:none;padding:0;margin:0}
+  .plan li{font-size:15px;margin:9px 0}
+  .box-list{background:var(--soft-bg);box-shadow:inset 0 0 0 1.5px var(--lila);border-radius:var(--radius);padding:20px 16px 14px;margin:22px 0}
+  .box-list h3{font-family:var(--display);text-align:center;font-size:22px;font-weight:700;line-height:1.2;margin:0 0 12px}
+  .box-list ul{list-style:none;padding:0;margin:0}
+  .box-list li{font-size:15.5px;margin:11px 0}
+  .kit-title{font-family:var(--display);color:var(--accent-txt);font-weight:800;font-size:22px;text-align:center;line-height:1.2;margin:30px 0 12px}
+  .kit-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:14px 0 6px}
+  .kcard{background:#fff;border-radius:16px;overflow:hidden;box-shadow:inset 0 0 0 1.5px var(--line),0 12px 26px -20px rgba(23,50,58,.45)}
+  .kcard .img{margin:0;border-radius:0;box-shadow:none;aspect-ratio:1/1;object-fit:cover}
+  .kname{margin:0;padding:8px 6px 9px;text-align:center;font-size:13px;font-weight:700;color:var(--ink);line-height:1.25}
+  .kit-detail p{font-size:15.5px;margin:14px 0}
+  .tag-pink{background:var(--rosa);color:var(--ink);font-weight:800;padding:1px 7px;border-radius:6px}
+  .buy-zone{margin-top:26px}
+  .price-box{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--card);box-shadow:inset 0 0 0 2.5px #3CC46A;border-radius:var(--radius);padding:12px 12px 12px 16px}
+  .price-box .pname{font-family:var(--display);color:var(--ink);font-weight:800;font-size:20px;line-height:1.1}
+  .price-box .pname small{display:block;font-family:var(--font);color:var(--muted);font-weight:600;font-size:12px;margin-top:4px;line-height:1.3}
+  .price-chip{flex:none;background:var(--soft-bg);border-radius:16px;padding:9px 12px;text-align:right}
+  .price-chip .from{color:var(--muted);font-size:12.5px}
+  .price-chip .now{font-family:var(--display);color:var(--green);font-weight:800;font-size:32px;line-height:1;white-space:nowrap}
+  .price-chip .off{display:inline-block;background:var(--hot);color:#fff;font-size:11px;font-weight:800;letter-spacing:.3px;border-radius:99px;padding:2px 8px;margin-bottom:3px}
+  .buy-zone .btn{margin:16px 0 16px}
+  .buy-note{text-align:center;color:#6f878f;font-size:12.5px;font-weight:600;margin:4px 0}
+
+  /* ---------- Tira infinita ---------- */
+  .strip{margin:22px -16px 0;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+  .strip-track{display:flex;gap:12px;width:max-content;padding:6px 0 14px;animation:stripScroll 30s linear infinite}
+  .strip:hover .strip-track{animation-play-state:paused}
+  @keyframes stripScroll{from{transform:translateX(0)}to{transform:translateX(calc(-50% - 6px))}}
+  .strip-item{flex:0 0 auto;width:140px;aspect-ratio:1/1;border-radius:18px;overflow:hidden;background:var(--lila);box-shadow:0 10px 24px -14px rgba(23,50,58,.35)}
+  .strip-item .img{margin:0;border-radius:0;box-shadow:none;height:100%;object-fit:cover}
+  .seguro{display:flex;align-items:center;gap:13px;max-width:340px;margin:22px auto 0;background:#fff;box-shadow:inset 0 0 0 1.5px var(--green-line),0 4px 14px rgba(26,157,75,.08);border-radius:16px;padding:12px 16px}
+  .seguro svg{flex:none;width:42px;height:48px}
+  .seguro b{display:block;font-size:15.5px;font-weight:800;color:var(--ink);line-height:1.25}
+  .seguro span{display:block;font-size:12.5px;color:var(--muted);line-height:1.35;margin-top:2px}
+
+  .h-rose{font-family:var(--display);color:var(--ink);font-weight:800;font-size:24px;text-align:center;line-height:1.2;margin:36px 0 0}
+  .h-rose em{font-style:normal;color:var(--accent-txt)}
+  .guarantee{background:#fff;box-shadow:inset 0 0 0 2px var(--lila),0 20px 44px -30px rgba(23,50,58,.45);border-radius:var(--radius);text-align:center;padding:22px 16px;margin:30px 0 0}
+  .guarantee .seal{width:84px;height:84px;margin:0 auto;border-radius:50%;background:linear-gradient(135deg,var(--lila),#9fd3c8);display:flex;flex-direction:column;align-items:center;justify-content:center;border:3px solid #fff;box-shadow:0 12px 26px -10px rgba(23,50,58,.4)}
+  .guarantee .seal b{font-family:var(--display);font-size:28px;font-weight:800;line-height:1}
+  .guarantee .seal small{font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+  .guarantee h3{font-family:var(--display);color:var(--ink);font-size:23px;font-weight:800;margin:12px 0 8px;line-height:1.15}
+  .guarantee p{color:var(--muted);margin:0 0 10px;font-size:15px}
+  .guarantee strong{color:var(--green);font-size:16px}
+  .faq{margin:10px 0 0}
+  .faq details{background:#fff;box-shadow:inset 0 0 0 1.5px var(--line);border-radius:16px;margin:10px 0;padding:0 15px}
+  .faq details[open]{box-shadow:inset 0 0 0 2px var(--lila)}
+  .faq summary{padding:14px 26px 14px 0;font-weight:700;cursor:pointer;list-style:none;position:relative}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";position:absolute;right:0;top:11px;width:22px;height:22px;border-radius:50%;background:var(--lila);text-align:center;line-height:22px;font-size:17px;font-weight:700}
+  .faq details[open] summary::after{content:"−";background:var(--rosa)}
+  .faq details p{margin:0 0 14px;font-size:14.5px;color:var(--muted)}
+  .closing{font-family:var(--display);text-align:center;font-weight:800;font-size:25px;line-height:1.2;margin:40px 0 0}
+  .closing em{font-style:normal;color:var(--accent-txt)}
+
+  /* ---------- Barra de compra fija (solo oferta) ---------- */
+  .sticky{position:fixed;left:0;right:0;bottom:0;z-index:50;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(243,250,247,.94);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);box-shadow:0 -10px 30px -18px rgba(23,50,58,.5);transform:translateY(115%);transition:transform .25s ease}
+  .sticky.on{transform:none}
+  .sticky .btn{max-width:428px;margin:0 auto;padding:14px 16px;font-size:18px}
+
+  /* ---------- Pie ---------- */
+  .footer{margin-top:auto;text-align:center;color:#7b9199;font-size:11.5px;line-height:1.5;padding:26px 6px 86px}
+  .footer a{color:inherit;text-decoration:underline;cursor:pointer}
+
+  /* ---------- Ventana emergente ---------- */
+  .modal{position:fixed;inset:0;z-index:80;display:flex;align-items:flex-end;justify-content:center;background:rgba(12,30,36,.55);padding:0}
+  .modal[hidden]{display:none}
+  .modal-box{position:relative;width:100%;max-width:460px;max-height:85vh;overflow-y:auto;-webkit-overflow-scrolling:touch;background:#fff;border-radius:22px 22px 0 0;padding:22px 20px 26px;animation:subir .25s ease both}
+  @media (min-width:520px){.modal{align-items:center;padding:16px}.modal-box{border-radius:22px}}
+  @keyframes subir{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+  .modal-x{position:sticky;top:0;float:right;width:34px;height:34px;border:0;border-radius:50%;background:var(--soft-bg);font-size:20px;line-height:1;cursor:pointer;color:var(--ink)}
+  .modal-box h2{font-family:var(--display);font-size:22px;margin:4px 0 12px}
+  .modal-box h4{font-size:15px;margin:16px 0 4px}
+  .modal-box p{font-size:14px;color:var(--muted);margin:0 0 8px}
+  .modal-box .upd{color:#7b9199;font-size:12px}
+
+  .confetti{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:60}
+
+  @media (max-width:360px){
+    .price-box{flex-direction:column;align-items:stretch;text-align:center;padding:12px}
+    .price-chip{text-align:center}
+  }
+  @media (prefers-reduced-motion:reduce){
+    .btn,.btn::before,.load-bar::after,.timer-box,.timer-box .ico,.strip-track{animation:none}
+  }
+</style>
+
+<header class="topbar">
+  <div class="progress" role="progressbar" aria-label="Quiz progress"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="topbar-in">
+    <button class="back is-hidden" id="btnBack" type="button" aria-label="Back">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="M11 18l-6-6 6-6"/></svg>
+    </button>
+    <span class="wordmark">PawSafe 🐾</span>
+    <span class="topbar-sp"></span>
+  </div>
+</header>
+
+<div class="app">
+  <main>
+
+    <!-- ============ PANTALLA 1 · PORTADA ============ -->
+    <section class="screen" data-step="1">
+      <h1 class="brand-title">Never lose sight of your <span class="tag">pet</span> again! 🐾</h1>
+      <p class="subtitle">Get all your pet's documents + the QR ID &amp; Tracking Tag — as instant PDFs ✨</p>
+
+      <p class="txt">Vet check-ins, daycare, boarding, trips, a lost-pet scare… every one of them is easier when your pet has <span class="t-rose">its own complete set of documents</span> — with their photo, their details and a tag that gets them back to you.</p>
+
+      <p class="txt">With the <b>PawSafe Kit</b> you create everything yourself in minutes and print it at home. <span class="hl-green">No design skills, no waiting, no shipping.</span></p>
+
+      <div class="img ph" data-img="1" data-r="4/5" data-alt="A woman on her sofa holding her pet's ID card, her golden retriever resting on her lap">IMAGEN 1 · Mujer con su perro y el carnet</div>
+
+      <p class="txt" style="margin-bottom:6px"><b>Your kit includes:</b></p>
+      <ul class="list-check">
+        <li>✅ Pet ID Card</li>
+        <li>✅ Birth Certificate</li>
+        <li>✅ Vaccination Card</li>
+        <li>✅ QR Identification &amp; Tracking Tag</li>
+      </ul>
+
+      <div class="img ph" data-img="2" data-r="1/1" data-alt="The four documents of the PawSafe Kit: pet ID card, birth certificate, vaccination card and QR tag" data-sin-precarga>IMAGEN 2 · Los 4 documentos del kit</div>
+
+      <p class="intro-cta">Answer 2 quick questions and we'll set up your pet's verification plan 👇</p>
+
+      <button class="btn" type="button" data-next>Verify my pet! 🐾</button>
+    </section>
+
+    <!-- ============ PANTALLA 2 · MASCOTA ============ -->
+    <section class="screen" data-step="2">
+      <h2 class="q-title top-space">Who are we verifying today?</h2>
+      <p class="q-sub">We'll personalize your plan based on your answers ✨</p>
+      <div class="options">
+        <button class="opt" type="button" data-q="mascota" data-v="0"><span class="emo">🐶</span><span class="radio"></span><span>My dog</span></button>
+        <button class="opt" type="button" data-q="mascota" data-v="1"><span class="emo">🐱</span><span class="radio"></span><span>My cat</span></button>
+        <button class="opt" type="button" data-q="mascota" data-v="2"><span class="emo">🐰</span><span class="radio"></span><span>Another furry friend</span></button>
+      </div>
+    </section>
+
+    <!-- ============ PANTALLA 3 · PREOCUPACIÓN ============ -->
+    <section class="screen" data-step="3">
+      <h2 class="q-title top-space">What worries you most about your pet?</h2>
+      <p class="q-sub">We'll personalize your plan based on your answers ✨</p>
+      <div class="options">
+        <button class="opt" type="button" data-q="preocupacion" data-v="0"><span class="emo">😰</span><span class="radio"></span><span>That they get lost and I can't find them</span></button>
+        <button class="opt" type="button" data-q="preocupacion" data-v="1"><span class="emo">🏥</span><span class="radio"></span><span>The paperwork every time we visit the vet</span></button>
+        <button class="opt" type="button" data-q="preocupacion" data-v="2"><span class="emo">🗂️</span><span class="radio"></span><span>Having all their info in one organized place</span></button>
+      </div>
+    </section>
+
+    <!-- ============ PANTALLA 4 · ¿ES COMPLICADO? ============ -->
+    <section class="screen" data-step="4">
+      <h2 class="q-title">Is it complicated?</h2>
+      <p class="answer-yes">The answer is <b>NO!</b> 🙌</p>
+
+      <p class="txt center">Right after your purchase, instructions arrive by <b>email and WhatsApp</b>. Then it's just 3 steps:</p>
+
+      <div class="steps">
+        <div class="step"><div class="n">1</div><div><b>Register your pet</b><span>Name, photo and the details you want on the documents.</span></div></div>
+        <div class="step"><div class="n">2</div><div><b>Request the documents</b><span>Pick what you need — you can reissue or correct anything from your pet panel.</span></div></div>
+        <div class="step"><div class="n">3</div><div><b>Receive your documents</b><span>By email or download, in under a minute. Print, cut, done.</span></div></div>
+      </div>
+
+      <button class="btn" type="button" data-next>Yes! Let's continue</button>
+    </section>
+
+    <!-- ============ PANTALLA 5 · ¿QUÉ NECESITO? ============ -->
+    <section class="screen" data-step="5">
+      <h2 class="q-title">Do I need special equipment?</h2>
+      <p class="answer-yes">The answer is <b>NO</b> again!</p>
+
+      <div class="img ph" data-img="4" data-r="3/4" data-alt="A home printer printing a pet ID card, next to scissors and a dog collar with a QR tag">IMAGEN 4 · Impresora, tijera y collar con tag</div>
+
+      <ul class="list-check">
+        <li>🖨️ <b>Any home printer</b> — inkjet or laser</li>
+        <li>📄 <b>Standard A4 paper</b> <span style="color:var(--muted)">(Letter works too with “fit to page”)</span></li>
+        <li>✂️ <b>A pair of scissors</b> to cut out the tag</li>
+      </ul>
+
+      <p class="txt">Fill in, print and prepare — you're guided <b>step by step</b> from your pet panel, so nothing can go wrong.</p>
+
+      <p class="txt">The tag comes in <b>several sizes</b>, each with a QR code you cut out and attach to your pet's collar. <span class="t-rose">Anyone who finds your pet can scan it with any phone</span> — no app needed. 📱</p>
+
+      <button class="btn" type="button" data-next>Continue</button>
+    </section>
+
+    <!-- ============ PANTALLA 6 · MASCOTAS Y MODELOS ============ -->
+    <section class="screen" data-step="6">
+      <h2 class="q-title">Meet some already-verified pets 🐶🐱</h2>
+
+      <div class="carousel wide">
+        <div class="slide"><div class="img ph" data-img="5" data-r="1/1" data-alt="A golden retriever next to its pet ID card">IMAGEN 5</div></div>
+        <div class="slide"><div class="img ph" data-img="6" data-r="1/1" data-alt="A tabby cat next to its birth certificate">IMAGEN 6</div></div>
+        <div class="slide"><div class="img ph" data-img="7" data-r="1/1" data-alt="A french bulldog with a QR tag on its collar">IMAGEN 7</div></div>
+        <div class="slide"><div class="img ph" data-img="8" data-r="1/1" data-alt="A border collie puppy with a QR tag on its collar">IMAGEN 8</div></div>
+        <div class="slide"><div class="img ph" data-img="9" data-r="1/1" data-alt="A white rabbit next to its pet ID card">IMAGEN 9</div></div>
+      </div>
+      <div class="dots" aria-hidden="true"></div>
+
+      <h3 class="sub-title">And a peek at your kit 🥰</h3>
+
+      <div class="carousel wide">
+        <div class="slide"><div class="img ph" data-img="10" data-r="1/1" data-alt="Pet ID card">IMAGEN 10</div><p class="caption">Pet ID Card</p></div>
+        <div class="slide"><div class="img ph" data-img="11" data-r="1/1" data-alt="Pet birth certificate">IMAGEN 11</div><p class="caption">Birth Certificate</p></div>
+        <div class="slide"><div class="img ph" data-img="26" data-r="1/1" data-alt="Pet vaccination card">IMAGEN 26</div><p class="caption">Vaccination Card</p></div>
+        <div class="slide"><div class="img ph" data-img="27" data-r="1/1" data-alt="QR identification tag on a dog collar">IMAGEN 27</div><p class="caption">QR ID &amp; Tracking Tag</p></div>
+      </div>
+      <div class="dots" aria-hidden="true"></div>
+
+      <h3 class="sub-title">Now it's your pet's turn! 💫</h3>
+      <p class="txt center">Your pet is family — and family deserves to be <b>safe, organized and easy to bring home.</b> In a few minutes, <span class="t-rose">you'll have their full set of documents ready to print.</span></p>
+
+      <button class="btn" type="button" data-next>I'm ready — show me my plan!</button>
+    </section>
+
+    <!-- ============ PANTALLA 7 · CARGA ============ -->
+    <section class="screen" data-step="7">
+      <h2 class="load-title">Your pet is moments away from being <span class="hl">verified!</span></h2>
+      <div class="load-row"><span>Building your plan...</span><span class="pct" id="loadPct">0%</span></div>
+      <div class="load-bar"><div class="load-fill" id="loadFill"></div></div>
+      <p class="load-msg" id="loadMsg" aria-live="polite">Checking your pet's details...</p>
+      <ul class="load-steps" id="loadSteps">
+        <li><i>✓</i>Your pet</li>
+        <li><i>✓</i>Your biggest worry</li>
+        <li><i>✓</i>Your documents kit</li>
+      </ul>
+    </section>
+
+    <!-- ============ PANTALLA 8 · RESULTADO Y OFERTA ============ -->
+    <section class="screen" data-step="8">
+      <div class="timer-box"><span class="ico" aria-hidden="true">⏰</span><span class="js-timer-label">Today-only price ends in</span><span class="js-timer">10:00</span></div>
+
+      <div class="congrats">
+        <h2>Congratulations! 🎉</h2>
+        <p>Your pet's <span class="prod">Verification Kit</span> is ready.</p>
+      </div>
+
+      <div class="plan">
+        <h3>📋 Your personal plan:</h3>
+        <ul>
+          <li id="planMascota"></li>
+          <li id="planPreocupacion"></li>
+        </ul>
+      </div>
+
+      <div class="box-list">
+        <h3>Here's everything in the PawSafe Kit:</h3>
+        <ul>
+          <li>✅ <b>Pet ID Card</b> — speeds up registration at vet clinics</li>
+          <li>✅ <b>Birth Certificate</b> — with your pet's photo and characteristics</li>
+          <li>✅ <b>Vaccination Card</b> — vaccines and deworming, super organized</li>
+          <li>✅ <b>QR ID &amp; Tracking Tag</b> — scan it with any phone</li>
+          <li>✅ <b>Pet panel</b> — reissue or correct any document, anytime</li>
+          <li>✅ <b>Instant delivery</b> — PDFs by email or download</li>
+        </ul>
+      </div>
+
+      <h3 class="kit-title">🐾 A closer look at your kit:</h3>
+      <div class="kit-grid">
+        <div class="kcard"><div class="img ph" data-img="10" data-r="1/1" data-alt="Pet ID card" data-sin-precarga>IMAGEN 10</div><p class="kname">Pet ID Card</p></div>
+        <div class="kcard"><div class="img ph" data-img="11" data-r="1/1" data-alt="Pet birth certificate" data-sin-precarga>IMAGEN 11</div><p class="kname">Birth Certificate</p></div>
+        <div class="kcard"><div class="img ph" data-img="26" data-r="1/1" data-alt="Pet vaccination card" data-sin-precarga>IMAGEN 26</div><p class="kname">Vaccination Card</p></div>
+        <div class="kcard"><div class="img ph" data-img="27" data-r="1/1" data-alt="QR identification tag" data-sin-precarga>IMAGEN 27</div><p class="kname">QR ID &amp; Tracking Tag</p></div>
+      </div>
+      <div class="kit-detail">
+        <p><span class="tag-pink">Pet ID Card</span> Speeds up registration at vet clinics. Personalize it in <b>green, blue or pink</b> with a quick, intuitive sign-up.</p>
+        <p><span class="tag-pink">Birth Certificate</span> Shows where your pet was born. Customize it with their <b>photo</b>, plus notes and their characteristics.</p>
+        <p><span class="tag-pink">Vaccination Card</span> Personalized with their <b>photo</b>, with space for vaccines and deworming — <b>super organized</b>.</p>
+        <p><span class="tag-pink">QR ID &amp; Tracking Tag</span> <b>Scan it with any phone</b> and a dedicated page for your pet opens, with your contact details. If the finder allows it, you also get a <b>WhatsApp notification</b> with the scan.</p>
+      </div>
+
+      <!-- CTA 1: resumen + botón -->
+      <div class="buy-slot" data-tipo="completo"></div>
+
+      <!-- Tira infinita -->
+      <div class="strip">
+        <div class="strip-track">
+        <div class="strip-item"><div class="img ph" data-img="31" data-r="1/1" data-alt="Pet ID card" data-sin-precarga></div></div>
+        <div class="strip-item"><div class="img ph" data-img="32" data-r="1/1" data-alt="Pet birth certificate" data-sin-precarga></div></div>
+        <div class="strip-item"><div class="img ph" data-img="33" data-r="1/1" data-alt="Pet vaccination card" data-sin-precarga></div></div>
+        <div class="strip-item"><div class="img ph" data-img="34" data-r="1/1" data-alt="QR identification tag" data-sin-precarga></div></div>
+        <div class="strip-item"><div class="img ph" data-img="35" data-r="1/1" data-alt="Verified pet" data-sin-precarga></div></div>
+        <div class="strip-item"><div class="img ph" data-img="36" data-r="1/1" data-alt="Verified pet" data-sin-precarga></div></div>
+          <!-- Set duplicado para loop infinito -->
+        <div class="strip-item" aria-hidden="true"><div class="img ph" data-img="31" data-r="1/1" data-alt="" data-sin-precarga></div></div>
+        <div class="strip-item" aria-hidden="true"><div class="img ph" data-img="32" data-r="1/1" data-alt="" data-sin-precarga></div></div>
+        <div class="strip-item" aria-hidden="true"><div class="img ph" data-img="33" data-r="1/1" data-alt="" data-sin-precarga></div></div>
+        <div class="strip-item" aria-hidden="true"><div class="img ph" data-img="34" data-r="1/1" data-alt="" data-sin-precarga></div></div>
+        <div class="strip-item" aria-hidden="true"><div class="img ph" data-img="35" data-r="1/1" data-alt="" data-sin-precarga></div></div>
+        <div class="strip-item" aria-hidden="true"><div class="img ph" data-img="36" data-r="1/1" data-alt="" data-sin-precarga></div></div>
+        </div>
+      </div>
+
+      <div class="seguro">
+        <svg viewBox="0 0 42 48" aria-hidden="true">
+          <defs><linearGradient id="gEscudo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2BC46A"/><stop offset="1" stop-color="#118A3E"/></linearGradient></defs>
+          <path d="M21 2 L38 8 V22 C38 33.5 30.5 42 21 46 C11.5 42 4 33.5 4 22 V8 Z" fill="url(#gEscudo)"/>
+          <path d="M13 24 L19 30 L30 18" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <div><b>100% Secure Checkout</b><span>Encrypted payment · Your details are always protected</span></div>
+      </div>
+
+      <div class="img ph" data-img="12" data-r="1/1" data-alt="The PawSafe Kit: pet panel, pet ID card, birth certificate, vaccination card and QR tag">IMAGEN 12 · Mockup del kit</div>
+
+      <h3 class="h-rose">See how <em>simple</em> it is 👇</h3>
+      <p class="txt center">After your purchase, you'll follow these 3 steps:</p>
+      <div class="steps">
+        <div class="step"><div class="n">1</div><div><b>Register your pet</b><span>Instructions arrive by email and WhatsApp right after payment.</span></div></div>
+        <div class="step"><div class="n">2</div><div><b>Request the documents</b><span>From your pet panel — you can reissue or correct them anytime.</span></div></div>
+        <div class="step"><div class="n">3</div><div><b>Receive the documents</b><span>By email or download, in under a minute.</span></div></div>
+      </div>
+
+      <h3 class="h-rose">One scan and <em>your pet is home</em> 🏡</h3>
+      <p class="txt center">Cut out the QR tag, attach it to the collar, and anyone who finds your pet can scan it. A page with your contact details opens right away — and if they allow it, <b>your phone gets the scan location.</b></p>
+      <div class="img ph" data-img="13" data-r="3/4" data-alt="A woman scanning the QR tag on her golden retriever's collar with her phone">IMAGEN 13 · Escaneando el tag del collar</div>
+
+      <div class="note"><i>ℹ️</i><div><b>Good to know:</b> the Pet ID and Birth Certificate are personalized documents made to make vet forms and check-ins easier — they're <b>not government-issued and have no legal value</b>. The tag is a QR tag, not a GPS device.</div></div>
+
+      <h3 class="h-rose">Some pets <em>already verified</em></h3>
+      <div class="carousel fade" data-inicio="medio" data-ig data-auto>
+        <div class="slide"><div class="img ph" data-img="14" data-r="1/1" data-alt="A golden retriever next to its pet ID card" data-sin-precarga>IMAGEN 14</div></div>
+        <div class="slide"><div class="img ph" data-img="15" data-r="1/1" data-alt="A tabby cat next to its birth certificate" data-sin-precarga>IMAGEN 15</div></div>
+        <div class="slide"><div class="img ph" data-img="16" data-r="1/1" data-alt="A french bulldog with a QR tag" data-sin-precarga>IMAGEN 16</div></div>
+        <div class="slide"><div class="img ph" data-img="17" data-r="1/1" data-alt="A border collie puppy with a QR tag" data-sin-precarga>IMAGEN 17</div></div>
+        <div class="slide"><div class="img ph" data-img="18" data-r="1/1" data-alt="A white rabbit next to its pet ID card" data-sin-precarga>IMAGEN 18</div></div>
+      </div>
+      <div class="dots-ig" aria-hidden="true"><div class="dots-track"></div></div>
+
+      <!-- CTA 2: solo botón -->
+      <div class="buy-slot" data-tipo="boton"></div>
+
+      <div class="guarantee">
+        <div class="seal" aria-hidden="true"><b>7</b><small>days</small></div>
+        <h3>A real, no-fuss guarantee.</h3>
+        <p>Get your kit, create your pet's documents and see for yourself. If for any reason it's not for you, just email us within 7 days and we'll refund you in full. <b>No forms, no awkward questions.</b></p>
+        <strong>Try it risk-free!</strong>
+      </div>
+
+      <h3 class="h-rose">The honest questions, <em>answered</em></h3>
+      <div class="faq">
+        <details><summary>Is my purchase secure?</summary><p>Yes. Payment is processed through a secure, encrypted checkout, and we never see or store your card details.</p></details>
+        <details><summary>What paper should I use?</summary><p>Standard A4 paper on any regular inkjet or laser printer. If you use Letter, just choose “fit to page” in your printer settings.</p></details>
+        <details><summary>When do I get access?</summary><p>Immediately after you register your pet. You'll receive the documents by email, or you can download them any time from your pet panel.</p></details>
+        <details><summary>Do the documents have legal value?</summary><p>No. The Pet ID and the Birth Certificate are personalized documents designed to make vet forms and check-ins easier. They are not government-issued and have no legal value.</p></details>
+        <details><summary>How are the documents delivered?</summary><p>They're available in your account on the site. You'll be guided step by step to fill them in, print them and get them ready.</p></details>
+        <details><summary>How does the ID tag work?</summary><p>After registering your pet, you get tag templates in several sizes, each with a QR code to cut out and attach to the collar. When someone scans it with their phone, a page opens with your pet's info and your contact details — and, if the finder allows it, the scan location is sent to your phone. It's a QR tag, not a GPS tracker.</p></details>
+        <details><summary>What if it's not for me?</summary><p>Just send us an email within 7 days and we'll refund you in full, no forms and no questions.</p></details>
+      </div>
+
+      <!-- CTA 3: resumen + botón -->
+      <div class="buy-slot" data-tipo="completo"></div>
+
+      <h3 class="closing">Never lose sight of your pet.<br><em>Verify your pet today!</em></h3>
+
+      <!-- CTA 4: solo botón -->
+      <div class="buy-slot" data-tipo="boton"></div>
+    </section>
+
+  </main>
+
+  <footer class="footer">© <span id="year">2026</span> PawSafe · <a data-modal="terms" role="button" tabindex="0">Terms</a> · <a data-modal="privacy" role="button" tabindex="0">Privacy</a><br>This site is not part of Facebook or Meta Platforms, Inc. Documents are personalized keepsakes with no legal value.</footer>
+</div>
+
+<div class="sticky" id="sticky" aria-hidden="true">
+  <a class="btn btn-buy js-checkout" data-checkout href="#" tabindex="-1">Get my kit <span class="pill">$<span data-m="precioActual">7</span></span></a>
+</div>
+
+<div class="modal" id="modal" hidden>
+  <div class="modal-box" role="dialog" aria-modal="true" aria-label="Legal">
+    <button class="modal-x" id="modalX" type="button" aria-label="Close">×</button>
+    <div id="modalBody"></div>
+  </div>
+</div>
+
+<template id="tplTerms">
+  <h2>Terms of Use</h2>
+  <p class="upd">Last updated: <span class="js-year">2026</span></p>
+  <h4>1. What you're buying</h4>
+  <p>The PawSafe Kit is a digital product: document templates and a pet panel to create, edit and download your pet's documents and QR tag as PDFs, available right after purchase. Nothing physical is shipped.</p>
+  <h4>2. Nature of the documents</h4>
+  <p>The Pet ID, Birth Certificate and Vaccination Card are personalized documents for personal use. They are not government-issued, are not official records and have no legal value. The QR tag is an identification tag, not a GPS tracking device.</p>
+  <h4>3. Payment</h4>
+  <p>One-time payment, no subscription. Payments are processed securely by our checkout provider. The final amount is shown at checkout.</p>
+  <h4>4. 7-day money-back guarantee</h4>
+  <p>If you're not happy, write to us within 7 days of your purchase and we'll refund you in full.</p>
+  <h4>5. Not affiliated with Meta</h4>
+  <p>This site is not part of the Facebook or Instagram websites or Meta Platforms, Inc., and is not endorsed by Meta in any way. Facebook and Instagram are trademarks of Meta Platforms, Inc.</p>
+  <h4>6. Contact</h4>
+  <p>Questions? <span class="js-soporte"></span></p>
+</template>
+
+<template id="tplPrivacy">
+  <h2>Privacy Policy</h2>
+  <p class="upd">Last updated: <span class="js-year">2026</span></p>
+  <h4>What we collect</h4>
+  <p>The name and email you enter at checkout, and the pet details and photos you upload to create your documents. Card details are handled by our payment provider — we never see or store them.</p>
+  <h4>Scan notifications</h4>
+  <p>When someone scans your pet's QR tag, they see the contact details you chose to show. The scan location is shared with you only if the person scanning allows it.</p>
+  <h4>Why we use it</h4>
+  <p>To deliver your purchase, send your access, answer your questions and process refunds.</p>
+  <h4>Cookies and ads</h4>
+  <p>We use cookies and similar technologies (including Meta's tools) to understand how our ads perform and to show relevant ads. You can manage cookies in your browser settings.</p>
+  <h4>We never sell your data</h4>
+  <p>Your information is only shared with the services we need to run the store, such as payment and email providers, or when required by law.</p>
+  <h4>Your rights</h4>
+  <p>You can ask us to see, correct or delete your data at any time.</p>
+  <h4>Contact</h4>
+  <p><span class="js-soporte"></span></p>
+</template>
+
+<template id="tplCompleto">
+  <div class="buy-zone">
+    <div class="price-box">
+      <div class="pname">PawSafe Kit<small>Pet ID + Birth Certificate + Vaccination Card + QR Tag</small></div>
+      <div class="price-chip">
+        <div class="off">TODAY ONLY</div>
+        <div class="from">Normally <s>$<span data-m="precioAntes">27</span></s></div>
+        <div class="now">$<span data-m="precioActual">7</span></div>
+      </div>
+    </div>
+    <p class="buy-timer">⏰ <span class="js-timer-label">Today-only price ends in</span> <span class="js-timer">10:00</span></p>
+    <a class="btn btn-buy js-checkout" data-checkout href="#">YES! Verify my pet now 🐾</a>
+    <p class="buy-note">⚡ Instant access · one-time payment · no subscription</p>
+    <p class="buy-note">🔒 Secure checkout · 7-day money-back guarantee</p>
+  </div>
+</template>
+
+<template id="tplBoton">
+  <div class="buy-zone">
+    <a class="btn btn-buy js-checkout" data-checkout href="#">Get the PawSafe Kit <span class="pill">$<span data-m="precioActual">7</span></span></a>
+  </div>
+</template>
+
+<script>
+/* ===================================================================
+   CONFIG · lo único que se edita
+   =================================================================== */
+/* 1) Sube las 14 imágenes (carpeta img/) a Impultienda y pega aquí la URL base (termina en /). */
+
+var CONFIG = {
+  /* 2) Link al checkout de ESTE producto en Impultienda. */
+  checkoutUrl: 'https://pawsafe.impultienda.ar/checkout',
+  /* Vacío = en Terms/Privacy dice "reply to your access email". */
+  correoSoporte: 'mundodigitaloka@gmail.com',
+
+  /* Precio: cámbialo aquí y en el checkout. Siempre en dólares. */
+  cifras: { precioActual: '27', precioAntes: '67' },
+
+  minutosTimer: 10,
+  textoTimer: 'Today-only price ends in',
+  textoTimerFin: 'Good news: your price is still reserved — grab it now',
+  sonido: true,            // Sonido de celebración al terminar la carga
+  autoCarrusel: 3500,      // Milisegundos entre fotos del carrusel de mascotas (0 = sin movimiento)
+
+  /* URL de cada imagen. Vacío = en carruseles se quita; en el resto queda el recuadro con su número. */
+  imagenes: {
+    1: 'https://aekpgsbqjzqntlbucbts.supabase.co/storage/v1/object/public/store-resources/71c8b0f6-c7ce-4e3b-9f14-463947fe4545/1792428096984_pv-01.webp',
+    2: 'https://aekpgsbqjzqntlbucbts.supabase.co/storage/v1/object/public/store-resources/71c8b0f6-c7ce-4e3b-9f14-463947fe4545/1792428394354_pv-02.webp',
+    4: 'https://aekpgsbqjzqntlbucbts.supabase.co/storage/v1/object/public/store-resources/71c8b0f6-c7ce-4e3b-9f14-463947fe4545/1792428395716_pv-04.webp',
+    5: 'https://aekpgsbqjzqntlbucbts.supabase.co/storage/v1/object/public/store-resources/71c8b0f6-c7ce-4e3b-9f14-463947fe4545/1792428404722_pv-14.webp', 6: 'https://aekpgsbqjzqntlbucbts.supabase.co/storage/v1/object/public/store-resources/71c8b0f6-c7ce-4e3b-9f14-463947fe4545/1792428405870_pv-15.webp', 7: 'https://aekpgsbqjzqntlbucbts.supabase.co/storage/v1/object/public/store-resources/71c8b0f6-c7ce-4e3b-9f14-463947fe4545/1792428407778_pv-16.webp', 8: 'https://aekpgsbqjzqntlbucbts.supabase.co/storage/v1/object/public/store-resources/71c8b0f6-c7ce-4e3b-9f14-463947fe4545/1792428408921_pv-17.webp', 9: 'https://aekpgsbqjzqntlbucbts.supabase.co/storage/v1/object/public/store-resources/71c8b0f6-c7ce-4e3b-9f14-463947fe4545/1792428410146_pv-18.webp',
+    10: 'https://aekpgsbqjzqntlbucbts.supabase.co/storage/v1/object/public/store-resources/71c8b0f6-c7ce-4e3b-9f14-463947fe4545/1792428396824_pv-10.webp',
+    11: 'https://aekpgsbqjzqntlbucbts.supabase.co/storage/v1/object/public/store-resources/71c8b0f6-c7ce-4e3b-9f14-463947fe4545/1792428400040_pv-11.webp',
+    26: 'https://aekpgsbqjzqntlbucbts.supabase.co/storage/v1/object/public/store-resources/71c8b0f6-c7ce-4e3b-9f14-463947fe4545/1792428411347_pv-26.webp',
+    27: 'https://aekpgsbqjzqntlbucbts.supabase.co/storage/v1/object/public/store-resources/71c8b0f6-c7ce-4e3b-9f14-463947fe4545/1792428412648_pv-27.webp',
+    12: 'https://aekpgsbqjzqntlbucbts.supabase.co/storage/v1/object/public/store-resources/71c8b0f6-c7ce-4e3b-9f14-463947fe4545/1792428402372_pv-12.webp',
+    13: 'https://aekpgsbqjzqntlbucbts.supabase.co/storage/v1/object/public/store-resources/71c8b0f6-c7ce-4e3b-9f14-463947fe4545/1792428403474_pv-13.webp',
+    14: 'https://aekpgsbqjzqntlbucbts.supabase.co/storage/v1/object/public/store-resources/71c8b0f6-c7ce-4e3b-9f14-463947fe4545/1792428404722_pv-14.webp', 15: 'https://aekpgsbqjzqntlbucbts.supabase.co/storage/v1/object/public/store-resources/71c8b0f6-c7ce-4e3b-9f14-463947fe4545/1792428405870_pv-15.webp', 16: 'https://aekpgsbqjzqntlbucbts.supabase.co/storage/v1/object/public/store-resources/71c8b0f6-c7ce-4e3b-9f14-463947fe4545/1792428407778_pv-16.webp', 17: 'https://aekpgsbqjzqntlbucbts.supabase.co/storage/v1/object/public/store-resources/71c8b0f6-c7ce-4e3b-9f14-463947fe4545/1792428408921_pv-17.webp', 18: 'https://aekpgsbqjzqntlbucbts.supabase.co/storage/v1/object/public/store-resources/71c8b0f6-c7ce-4e3b-9f14-463947fe4545/1792428410146_pv-18.webp',
+    /* Tira infinita */
+    31: 'https://aekpgsbqjzqntlbucbts.supabase.co/storage/v1/object/public/store-resources/71c8b0f6-c7ce-4e3b-9f14-463947fe4545/1792428396824_pv-10.webp', 32: 'https://aekpgsbqjzqntlbucbts.supabase.co/storage/v1/object/public/store-resources/71c8b0f6-c7ce-4e3b-9f14-463947fe4545/1792428400040_pv-11.webp', 33: 'https://aekpgsbqjzqntlbucbts.supabase.co/storage/v1/object/public/store-resources/71c8b0f6-c7ce-4e3b-9f14-463947fe4545/1792428411347_pv-26.webp', 34: 'https://aekpgsbqjzqntlbucbts.supabase.co/storage/v1/object/public/store-resources/71c8b0f6-c7ce-4e3b-9f14-463947fe4545/1792428412648_pv-27.webp', 35: 'https://aekpgsbqjzqntlbucbts.supabase.co/storage/v1/object/public/store-resources/71c8b0f6-c7ce-4e3b-9f14-463947fe4545/1792428404722_pv-14.webp', 36: 'https://aekpgsbqjzqntlbucbts.supabase.co/storage/v1/object/public/store-resources/71c8b0f6-c7ce-4e3b-9f14-463947fe4545/1792428405870_pv-15.webp'
+  }
+};
+</script>
+
+<script>
+(function () {
+  'use strict';
+
+  var PLAN = {
+    mascota: [
+      '🐶 <b>Your Dog Kit:</b> Pet ID, Birth Certificate, Vaccination Card and a QR collar tag — ready to print today.',
+      '🐱 <b>Your Cat Kit:</b> Pet ID, Birth Certificate, Vaccination Card and a QR tag sized for the collar — ready to print today.',
+      '🐾 <b>Your Pet Kit:</b> a full set of documents customized with your pet\'s photo and details — ready to print today.'
+    ],
+    preocupacion: [
+      '📍 <b>Start with the QR Tag</b> — so anyone who finds your pet can reach you in seconds.',
+      '🏥 <b>Start with the Pet ID &amp; Vaccination Card</b> — so every vet check-in is quicker.',
+      '🗂️ <b>Start with your Pet Panel</b> — one place for all their info, and you can reissue or correct any document anytime.'
+    ]
+  };
+
+  var TOTAL = 8, CARGA = 7, OFERTA = 8;
+  var PROGRESO = { 1: 0.1, 2: 0.24, 3: 0.38, 4: 0.52, 5: 0.66, 6: 0.8, 7: 0.92, 8: 1 };
+  var PRECARGA = { 1: [2], 2: [4], 3: [4, 5], 4: [5, 6], 5: [6], 6: [8], 7: [8] };
+  var DURACION_CARGA = 5000;
+  var MENSAJES_CARGA = [
+    'Checking your pet\'s details...',
+    'Matching your biggest worry...',
+    'Preparing your documents kit...',
+    'Your plan is ready!'
+  ];
+
+  function $(s, c) { return (c || document).querySelector(s); }
+  function $$(s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); }
+
+  var params = new URLSearchParams(location.search);
+  var enReposo = window.requestIdleCallback || function (cb) { return setTimeout(cb, 300); };
+  var menosMovimiento = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var session = {
+    get: function (k) { try { return JSON.parse(sessionStorage.getItem(k)); } catch (e) { return null; } },
+    set: function (k, v) { try { sessionStorage.setItem(k, JSON.stringify(v)); } catch (e) {} }
+  };
+
+  /* ===================== Montaje ===================== */
+  var tplCompleto = $('#tplCompleto'), tplBoton = $('#tplBoton');
+  $$('.buy-slot').forEach(function (slot) {
+    var tpl = slot.getAttribute('data-tipo') === 'boton' ? tplBoton : tplCompleto;
+    slot.parentNode.replaceChild(tpl.content.cloneNode(true), slot);
+  });
+  $$('[data-m]').forEach(function (el) { var v = CONFIG.cifras[el.getAttribute('data-m')]; if (v != null) el.textContent = v; });
+
+  /* Link de pago: al hacer clic se copian las UTMs y los click ids de la URL de la página
+     (sin pisar las que ya tenga el link). */
+  $$('.js-checkout').forEach(function (a) {
+    if (CONFIG.checkoutUrl) a.setAttribute('href', CONFIG.checkoutUrl);
+    a.addEventListener('click', function () {
+      try {
+        var u = new URL(a.getAttribute('href'), location.href);
+        params.forEach(function (v, k) {
+          if (/^(utm_[a-z]+|fbclid|gclid|ttclid|src|sck|xcod)$/.test(k) && v && !u.searchParams.has(k)) u.searchParams.set(k, v);
+        });
+        a.setAttribute('href', u.origin === location.origin ? u.pathname + u.search + u.hash : u.href);
+      } catch (e) {}
+    });
+  });
+  var anio = new Date().getFullYear();
+  $('#year').textContent = anio;
+
+  /* Imágenes: cada recuadro "IMAGEN N" se cambia por su foto si hay URL en CONFIG.imagenes. */
+  $$('[data-img]').forEach(function (ph) {
+    var n = ph.getAttribute('data-img');
+    var url = CONFIG.imagenes[n];
+    var slide = ph.closest ? ph.closest('.carousel > .slide') : null;
+    if (!url || /REEMPLAZAR/.test(url)) {
+      if (!url && slide && slide.parentNode) slide.parentNode.removeChild(slide);
+      else ph.style.aspectRatio = (ph.getAttribute('data-r') || '1/1').replace('/', ' / ');
+      return;
+    }
+    var r = (ph.getAttribute('data-r') || '1/1').split('/');
+    var img = document.createElement('img');
+    img.className = ph.className.replace(/\bph\b/, '').trim();
+    img.alt = ph.getAttribute('data-alt') || '';
+    img.width = 1080;
+    img.height = Math.round(1080 * (+r[1]) / (+r[0]));
+    img.decoding = 'async';
+    if (n === '1') img.setAttribute('fetchpriority', 'high'); else img.loading = 'lazy';
+    if (ph.hasAttribute('data-sin-precarga')) img.setAttribute('data-sin-precarga', '');
+    img.src = url;
+    ph.parentNode.replaceChild(img, ph);
+  });
+
+  var answers = session.get('pvq_respuestas') || {};
+  $$('.opt').forEach(function (o) { if (answers[o.getAttribute('data-q')] === +o.getAttribute('data-v')) o.classList.add('selected'); });
+
+  /* ===================== Ventana emergente: Terms / Privacy ===================== */
+  var modal = $('#modal'), modalBody = $('#modalBody'), ultimoFoco = null;
+  function abrirModal(cual) {
+    var tpl = $(cual === 'privacy' ? '#tplPrivacy' : '#tplTerms');
+    modalBody.innerHTML = '';
+    modalBody.appendChild(tpl.content.cloneNode(true));
+    $$('.js-soporte', modalBody).forEach(function (e) {
+      if (CONFIG.correoSoporte) { e.innerHTML = 'Email us at <b></b>.'; e.querySelector('b').textContent = CONFIG.correoSoporte; }
+      else e.textContent = 'Just reply to the access email you received after your purchase.';
+    });
+    $$('.js-year', modalBody).forEach(function (e) { e.textContent = anio; });
+    ultimoFoco = document.activeElement;
+    modal.hidden = false;
+    document.body.classList.add('modal-open');
+    $('.modal-box').scrollTop = 0;
+    $('#modalX').focus();
+  }
+  function cerrarModal() {
+    modal.hidden = true;
+    document.body.classList.remove('modal-open');
+    if (ultimoFoco && ultimoFoco.focus) ultimoFoco.focus();
+  }
+  $$('[data-modal]').forEach(function (a) {
+    a.addEventListener('click', function (e) { e.preventDefault(); abrirModal(a.getAttribute('data-modal')); });
+    a.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); abrirModal(a.getAttribute('data-modal')); } });
+  });
+  $('#modalX').addEventListener('click', cerrarModal);
+  modal.addEventListener('click', function (e) { if (e.target === modal) cerrarModal(); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !modal.hidden) cerrarModal(); });
+
+  /* ===================== Precarga de la pantalla siguiente ===================== */
+  var yaPrecargadas = {};
+  function precargar(n) {
+    if (yaPrecargadas[n]) return;
+    var sc = $('.screen[data-step="' + n + '"]');
+    if (!sc) return;
+    yaPrecargadas[n] = true;
+    $$('img:not([data-sin-precarga])', sc).forEach(function (img) {
+      var i = new Image();
+      i.decoding = 'async';
+      i.src = img.getAttribute('src');
+    });
+  }
+
+  /* ===================== Botones: solo se animan cuando están en pantalla ===================== */
+  if (window.IntersectionObserver) {
+    var ioBotones = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { en.target.classList.toggle('pausado', !en.isIntersecting); });
+    });
+    $$('.btn').forEach(function (b) { ioBotones.observe(b); });
+  }
+
+  /* ===================== Barra de compra fija ===================== */
+  var sticky = $('#sticky'), botonesVisibles = 0;
+  function actualizarSticky() {
+    var mostrar = step === OFERTA && botonesVisibles === 0 && window.scrollY > 700;
+    sticky.classList.toggle('on', mostrar);
+    sticky.setAttribute('aria-hidden', mostrar ? 'false' : 'true');
+    $('.btn', sticky).tabIndex = mostrar ? 0 : -1;
+  }
+  if (window.IntersectionObserver) {
+    var ioCompra = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) { botonesVisibles += en.isIntersecting ? 1 : -1; });
+      if (botonesVisibles < 0) botonesVisibles = 0;
+      actualizarSticky();
+    });
+    $$('.buy-zone .btn').forEach(function (b) { ioCompra.observe(b); });
+    window.addEventListener('scroll', actualizarSticky, { passive: true });
+  }
+
+  /* ===================== Sonido de celebración (generado, sin archivos) ===================== */
+  var actx = null;
+  function audio() {
+    if (!CONFIG.sonido) return null;
+    try {
+      if (!actx) {
+        var AC = window.AudioContext || window.webkitAudioContext;
+        if (!AC) return null;
+        actx = new AC();
+      }
+      if (actx.state === 'suspended') actx.resume();
+      return actx;
+    } catch (e) { return null; }
+  }
+  function desbloquearAudio() {
+    if (actx && actx.state === 'running') return;
+    var ctx = audio();
+    if (!ctx) return;
+    try {
+      var b = ctx.createBuffer(1, 1, 22050), s = ctx.createBufferSource();
+      s.buffer = b; s.connect(ctx.destination); s.start(0);
+    } catch (e) {}
+  }
+  document.addEventListener('touchend', desbloquearAudio, true);
+  document.addEventListener('click', desbloquearAudio, true);
+
+  function campana(ctx, destino, f, t) {
+    var car = ctx.createOscillator(), mod = ctx.createOscillator(), modG = ctx.createGain(), g = ctx.createGain();
+    car.type = 'sine'; mod.type = 'sine';
+    car.frequency.value = f; mod.frequency.value = f * 2;
+    modG.gain.setValueAtTime(f * 0.5, t);
+    modG.gain.exponentialRampToValueAtTime(1, t + 0.6);
+    mod.connect(modG); modG.connect(car.frequency);
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(0.13, t + 0.015);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + 1.2);
+    car.connect(g); g.connect(destino);
+    car.start(t); mod.start(t);
+    car.stop(t + 1.3); mod.stop(t + 1.3);
+  }
+  function sonidoCelebracion() {
+    var ctx = audio();
+    if (!ctx) return;
+    try {
+      var t = ctx.currentTime + 0.03;
+      var salida = ctx.createGain(); salida.gain.value = 0.85; salida.connect(ctx.destination);
+      var eco = ctx.createDelay(), retro = ctx.createGain(), filtro = ctx.createBiquadFilter();
+      eco.delayTime.value = 0.13; retro.gain.value = 0.28;
+      filtro.type = 'lowpass'; filtro.frequency.value = 2800;
+      salida.connect(eco); eco.connect(filtro); filtro.connect(retro); retro.connect(eco); filtro.connect(ctx.destination);
+      var largo = Math.floor(ctx.sampleRate * 0.5), buf = ctx.createBuffer(1, largo, ctx.sampleRate), d = buf.getChannelData(0);
+      for (var i = 0; i < largo; i++) d[i] = Math.random() * 2 - 1;
+      var ruido = ctx.createBufferSource(), agudos = ctx.createBiquadFilter(), gRuido = ctx.createGain();
+      ruido.buffer = buf; agudos.type = 'highpass'; agudos.frequency.value = 6000;
+      gRuido.gain.setValueAtTime(0.0001, t);
+      gRuido.gain.exponentialRampToValueAtTime(0.05, t + 0.05);
+      gRuido.gain.exponentialRampToValueAtTime(0.0001, t + 0.5);
+      ruido.connect(agudos); agudos.connect(gRuido); gRuido.connect(salida);
+      ruido.start(t); ruido.stop(t + 0.55);
+      [[783.99, 0], [1046.5, 0.08], [1318.5, 0.16], [1568, 0.27]].forEach(function (n) { campana(ctx, salida, n[0], t + n[1]); });
+    } catch (e) {}
+  }
+
+  /* ===================== Navegación: estado ===================== */
+  var step = 0, lock = false, pila = [];
+
+  /* ===================== Carruseles ===================== */
+  var SLOT_PUNTO = 14;
+  var carruseles = [];
+  $$('.carousel').forEach(function (c) {
+    var nav = c.nextElementSibling;
+    if (!nav || !(nav.classList.contains('dots') || nav.classList.contains('dots-ig'))) return;
+    var estiloIg = c.hasAttribute('data-ig');
+    var contPuntos = estiloIg ? nav.querySelector('.dots-track') : nav;
+    var slides = Array.prototype.slice.call(c.children);
+    if (!slides.length) return;
+    var html = '';
+    for (var i = 0; i < slides.length; i++) html += '<span></span>';
+    contPuntos.innerHTML = html;
+    var ds = Array.prototype.slice.call(contPuntos.children);
+    var actual = -1, ticking = false;
+    var yaCentrado = c.getAttribute('data-inicio') !== 'medio';
+
+    function irA(i) {
+      c.scrollTo({ left: slides[i].offsetLeft - (c.clientWidth - slides[i].offsetWidth) / 2, behavior: 'smooth' });
+    }
+    function update() {
+      var center = c.scrollLeft + c.clientWidth / 2, best = 0, bestDist = Infinity;
+      slides.forEach(function (s, i) {
+        var d = Math.abs(s.offsetLeft + s.offsetWidth / 2 - center);
+        if (d < bestDist) { bestDist = d; best = i; }
+      });
+      if (best === actual) return;
+      actual = best;
+      if (estiloIg) {
+        contPuntos.style.transform = 'translateX(' + ((2 - best) * SLOT_PUNTO) + 'px)';
+        ds.forEach(function (d, i) {
+          var dist = Math.abs(i - best);
+          var escala = dist === 0 ? 1 : dist === 1 ? 0.7 : dist === 2 ? 0.45 : 0;
+          d.style.transform = 'scale(' + escala + ')';
+          d.classList.toggle('on', i === best);
+        });
+        slides.forEach(function (s, i) { s.classList.toggle('is-active', i === best); });
+      } else {
+        ds.forEach(function (d, i) { d.classList.toggle('on', i === best); });
+      }
+    }
+    function alMostrar() {
+      if (!c.clientWidth) return;
+      if (!yaCentrado) {
+        var medio = slides[Math.floor((slides.length - 1) / 2)];
+        c.scrollLeft = medio.offsetLeft - (c.clientWidth - medio.offsetWidth) / 2;
+        yaCentrado = true;
+      }
+      actual = -1;
+      update();
+    }
+    c.addEventListener('scroll', function () {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () { ticking = false; update(); });
+    }, { passive: true });
+
+    var pausaHasta = 0;
+    function pausar() { pausaHasta = Date.now() + 6000; }
+    ds.forEach(function (d, i) { d.addEventListener('click', function () { pausar(); irA(i); }); });
+
+    if (c.hasAttribute('data-auto') && CONFIG.autoCarrusel > 0 && !menosMovimiento) {
+      var visible = false;
+      ['touchstart', 'pointerdown', 'wheel'].forEach(function (ev) { c.addEventListener(ev, pausar, { passive: true }); });
+      if (window.IntersectionObserver) {
+        new IntersectionObserver(function (entries) { visible = entries[0].isIntersecting; }, { threshold: 0.4 }).observe(c);
+      } else {
+        visible = true;
+      }
+      setInterval(function () {
+        if (step !== OFERTA || !visible || document.hidden || Date.now() < pausaHasta || actual < 0) return;
+        irA(actual + 1 < slides.length ? actual + 1 : 0);
+      }, CONFIG.autoCarrusel);
+    }
+    carruseles.push(alMostrar);
+  });
+
+  /* ===================== Navegación ===================== */
+  function alTope() {
+    try { window.scrollTo(0, 0); } catch (e) {}
+    if (document.scrollingElement) document.scrollingElement.scrollTop = 0;
+    if (document.documentElement) document.documentElement.scrollTop = 0;
+    if (document.body) document.body.scrollTop = 0;
+  }
+
+  function go(n, guardar) {
+    n = Math.max(1, Math.min(TOTAL, n));
+    if (n === step) { lock = false; return; }
+    if (guardar && step) pila.push(step);
+    step = n;
+    $$('.screen').forEach(function (s) { s.classList.toggle('active', +s.getAttribute('data-step') === n); });
+    $('#progressFill').style.transform = 'scaleX(' + PROGRESO[n] + ')';
+    $('#btnBack').classList.toggle('is-hidden', n === 1 || n === CARGA);
+    alTope();
+    try { history.replaceState({ step: n }, ''); } catch (e) {}
+    carruseles.forEach(function (fn) { fn(); });
+    if (n === CARGA) startLoading(); else $('#loadFill').classList.remove('run');
+    if (n === OFERTA) enterOffer();
+    actualizarSticky();
+    enReposo(function () { (PRECARGA[n] || []).forEach(precargar); });
+    lock = false;
+  }
+
+  $$('[data-next]').forEach(function (b) {
+    b.addEventListener('click', function () { go(step + 1, true); });
+  });
+
+  $$('.opt').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      if (lock) return;
+      lock = true;
+      var q = btn.getAttribute('data-q');
+      $$('.opt[data-q="' + q + '"]').forEach(function (o) { o.classList.remove('selected'); });
+      btn.classList.add('selected');
+      answers[q] = +btn.getAttribute('data-v');
+      session.set('pvq_respuestas', answers);
+      setTimeout(function () { go(step + 1, true); }, 350);
+    });
+  });
+
+  $('#btnBack').addEventListener('click', function () {
+    var prev = pila.pop();
+    if (prev === CARGA) prev = pila.pop();
+    if (!prev) prev = step === OFERTA ? CARGA - 1 : step - 1;
+    go(prev, false);
+  });
+
+  /* ===================== Carga ===================== */
+  var loadingRun = 0;
+  function startLoading() {
+    var run = ++loadingRun;
+    var fill = $('#loadFill'), pct = $('#loadPct'), msg = $('#loadMsg'), pasos = $$('#loadSteps li');
+    fill.classList.remove('run');
+    fill.style.transitionDuration = (DURACION_CARGA / 1000) + 's';
+    pct.textContent = '0%';
+    msg.textContent = MENSAJES_CARGA[0];
+    msg.classList.remove('swap');
+    pasos.forEach(function (li) { li.classList.remove('ok'); });
+    void fill.offsetWidth;
+
+    var t0 = 0, lastV = -1, lastMsg = 0;
+    requestAnimationFrame(function () {
+      if (run !== loadingRun) return;
+      fill.classList.add('run');
+      t0 = performance.now();
+      requestAnimationFrame(frame);
+    });
+    function cambiarMensaje(i) {
+      msg.classList.add('swap');
+      if (pasos[i - 1]) pasos[i - 1].classList.add('ok');
+      setTimeout(function () {
+        if (run !== loadingRun) return;
+        msg.textContent = MENSAJES_CARGA[i];
+        msg.classList.remove('swap');
+      }, 200);
+    }
+    function frame(t) {
+      if (run !== loadingRun || step !== CARGA) return;
+      var p = Math.min(1, (t - t0) / DURACION_CARGA);
+      var v = Math.round(p * (2 - p) * 100);
+      if (v !== lastV) { lastV = v; pct.textContent = v + '%'; }
+      var mi = Math.min(MENSAJES_CARGA.length - 1, Math.floor(p * MENSAJES_CARGA.length));
+      if (mi !== lastMsg) { lastMsg = mi; cambiarMensaje(mi); }
+      if (p < 1) requestAnimationFrame(frame);
+      else setTimeout(function () {
+        if (run === loadingRun && step === CARGA) { go(OFERTA, true); celebrar(); }
+      }, 450);
+    }
+  }
+
+  /* ===================== Celebración ===================== */
+  function celebrar() {
+    requestAnimationFrame(function () { confeti(); sonidoCelebracion(); });
+  }
+  function confeti() {
+    if (menosMovimiento) return;
+    var cv = document.createElement('canvas');
+    var ctx = cv.getContext && cv.getContext('2d');
+    if (!ctx) return;
+    var W = window.innerWidth, H = window.innerHeight, dpr = Math.min(window.devicePixelRatio || 1, 2);
+    cv.className = 'confetti';
+    cv.width = Math.round(W * dpr);
+    cv.height = Math.round(H * dpr);
+    document.body.appendChild(cv);
+    var caja = $('.congrats').getBoundingClientRect();
+    var ox = caja.left + caja.width / 2, oy = caja.top + caja.height / 2;
+    var colores = ['#DCEFEA', '#FFE3D2', '#FFE7A6', '#1E9A8A', '#17323A', '#FFC84A', '#16C653'];
+    var piezas = [], i, ang, vel;
+    for (i = 0; i < 90; i++) {
+      ang = -Math.PI / 2 + (Math.random() - 0.5) * Math.PI * 1.2;
+      vel = 7 + Math.random() * 9;
+      piezas.push({ x: ox, y: oy, vx: Math.cos(ang) * vel, vy: Math.sin(ang) * vel, w: 6 + Math.random() * 5, h: 9 + Math.random() * 7, r: Math.random() * 6.28, vr: (Math.random() - 0.5) * 0.3, c: colores[i % colores.length] });
+    }
+    for (i = 0; i < 50; i++) {
+      piezas.push({ x: Math.random() * W, y: -10 - Math.random() * H * 0.4, vx: (Math.random() - 0.5) * 2, vy: 2 + Math.random() * 3, w: 6 + Math.random() * 4, h: 8 + Math.random() * 6, r: Math.random() * 6.28, vr: (Math.random() - 0.5) * 0.25, c: colores[i % colores.length] });
+    }
+    var DUR = 3000, inicio = performance.now(), previo = inicio;
+    function frame(t) {
+      var k = Math.min(3, (t - previo) / 16.67);
+      previo = t;
+      var transcurrido = t - inicio;
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+      ctx.clearRect(0, 0, cv.width, cv.height);
+      ctx.globalAlpha = transcurrido > DUR - 700 ? Math.max(0, (DUR - transcurrido) / 700) : 1;
+      for (var j = 0; j < piezas.length; j++) {
+        var p = piezas[j];
+        p.vy += 0.3 * k; if (p.vy > 7) p.vy = 7;
+        p.vx *= Math.pow(0.985, k);
+        p.x += p.vx * k; p.y += p.vy * k; p.r += p.vr * k;
+        var cs = Math.cos(p.r) * dpr, sn = Math.sin(p.r) * dpr;
+        ctx.setTransform(cs, sn, -sn, cs, p.x * dpr, p.y * dpr);
+        ctx.fillStyle = p.c;
+        ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+      }
+      if (transcurrido < DUR) requestAnimationFrame(frame);
+      else if (cv.parentNode) cv.parentNode.removeChild(cv);
+    }
+    requestAnimationFrame(frame);
+  }
+
+  /* ===================== Oferta ===================== */
+  var offerStarted = false;
+  function enterOffer() {
+    var m = Number.isInteger(answers.mascota) ? answers.mascota : 0;
+    var p = Number.isInteger(answers.preocupacion) ? answers.preocupacion : 0;
+    $('#planMascota').innerHTML = PLAN.mascota[m];
+    $('#planPreocupacion').innerHTML = PLAN.preocupacion[p];
+    if (!offerStarted) { offerStarted = true; startTimer(); }
+  }
+
+  /* Timer: arranca al ver la oferta y NO se reinicia. Solo empieza de nuevo si pasó más de un día. */
+  function startTimer() {
+    var KEY = 'pvq_timer_fin', fin = 0, iv = null;
+    var relojes = $$('.js-timer'), etiquetas = $$('.js-timer-label');
+    etiquetas.forEach(function (e) { e.textContent = CONFIG.textoTimer; });
+    try { fin = +localStorage.getItem(KEY) || 0; } catch (e) {}
+    if (!fin || Date.now() - fin > 864e5) {
+      fin = Date.now() + CONFIG.minutosTimer * 60e3;
+      try { localStorage.setItem(KEY, fin); } catch (e) {}
+    }
+    function tick() {
+      var left = fin - Date.now();
+      if (left <= 0) {
+        etiquetas.forEach(function (e) { e.textContent = CONFIG.textoTimerFin; });
+        relojes.forEach(function (e) { e.textContent = ''; });
+        clearInterval(iv);
+        return;
+      }
+      var m = Math.floor(left / 60000), s = Math.floor(left / 1000) % 60;
+      var txt = ('0' + m).slice(-2) + ':' + ('0' + s).slice(-2);
+      relojes.forEach(function (e) { e.textContent = txt; });
+    }
+    tick();
+    iv = setInterval(tick, 1000);
+  }
+
+  /* ===================== Arranque ===================== */
+  var pasoParam = parseInt(params.get('paso'), 10);
+  go(pasoParam >= 1 && pasoParam <= TOTAL ? pasoParam : 1, false);
+})();
+</script>
